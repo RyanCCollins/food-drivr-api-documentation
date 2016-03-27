@@ -4,7 +4,7 @@ title: API Reference
 language_tabs:
   - shell
   - ruby
-  - python
+  - swift
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -18,67 +18,58 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Food Drivr API! This documentation should serve as a point of reference for connecting to the API as a user and for interacting with the database.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Javascript, Ruby, Shell and Swift! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+This API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
 # Authentication
 
-> To authorize, use this code:
+> To authorize as a user, you will need to make a request to the server for an access token:
 
 ```ruby
-require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
 ```
 
-```python
-import kittn
+```swift
 
-api = kittn.authorize('meowmeowmeow')
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl "http://fooddrivr.com/api/v1/auth"
+  -H "Authorization: auth_token"
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Make sure to replace `auth_token` with an API token.
 
+The API uses JWT based authentication.  You will make a request, with credentials, for a token.
 Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+The Food Drivr API expects for an auth token to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: meowmeowmeow`
+`Authorization: auth_token`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Note that the auth token is generated when a user registers or authenticates with a username and password.
 </aside>
 
-# Kittens
+# Donations
 
-## Get All Kittens
+## Get All Donations
 
 ```ruby
-require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
 ```
 
-```python
-import kittn
+```swift
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
 ```
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl "http://example.com/api/v1/donations"
+  -H "Authorization: auth_token"
 ```
 
 > The above command returns JSON structured like this:
@@ -87,57 +78,87 @@ curl "http://example.com/api/kittens"
 [
   {
     "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "donor_id": "12346",
+    "driver_id": "12345",
+    "coordinates": {
+      "latitude": ,
+      "longitute": ,
+      "accuracy": ,
+      "address_listed":
+    },
+    "initiated": {
+      "date_time": "2009-06-15T13:45:30"
+    },
+    "pickup": {
+      "date_time": "2009-06-15T13:45:30"
+    },
+    "meta": {
+      "images": [{
+          "url": "http://someimageurl.com/image.png"
+        }, {
+          "url": "http://someimageurl.com/image.png"
+      }],
+      "description": "Text description about the items donated"
+    }
   },
   {
     "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "donor_id": "12346",
+    "driver_id": "12345",
+    "coordinates": {
+      "latitude": ,
+      "longitute": ,
+      "accuracy": ,
+      "address_listed":
+    },
+    "initiated": {
+      "date_time": "2009-06-15T13:45:30"
+    },
+    "pickup": {
+      "date_time": "2009-06-15T13:45:30"
+    },
+    "meta": {
+      "images": [{
+          "url": "http://someimageurl.com/image.png"
+        }, {
+          "url": "http://someimageurl.com/image.png"
+      }],
+      "description": "Text description about the items donated"
+    }
   }
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint retrieves all donations.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET http://example.com/api/v1/donations`
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+completed | false | If set to true, the result will include completed requests.
+date_range |        | If included, will send a specific date range
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember - you need to include an auth token!
 </aside>
 
-## Get a Specific Kitten
+## Get a Specific Donation
 
 ```ruby
-require 'kittn'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
 ```
 
-```python
-import kittn
+```swift
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
 ```
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+curl "http://example.com/api/v1/donations/2"
+  -H "Authorization: user_token"
 ```
 
 > The above command returns JSON structured like this:
@@ -145,24 +166,41 @@ curl "http://example.com/api/kittens/2"
 ```json
 {
   "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+  "donor_id": "12346",
+  "driver_id": "12345",
+  "coordinates": {
+    "latitude": ,
+    "longitute": ,
+    "accuracy": ,
+    "address_listed":
+  },
+  "initiated": {
+    "date_time": "2009-06-15T13:45:30"
+  },
+  "pickup": {
+    "date_time": "2009-06-15T13:45:30"
+  },
+  "meta": {
+    "images": [{
+        "url": "http://someimageurl.com/image.png"
+      }, {
+        "url": "http://someimageurl.com/image.png"
+    }],
+    "description": "Text description about the items donated"
+  }
+},
 ```
 
-This endpoint retrieves a specific kitten.
+This endpoint retrieves a specific donation.
 
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET http://example.com/api/v1/donations/<ID>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
-
+ID | The ID of the donation to retrieve
