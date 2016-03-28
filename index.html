@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;swift&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;javascript&quot;,&quot;swift&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -103,6 +103,7 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="javascript">javascript</a>
               <a href="#" data-language-name="swift">swift</a>
         </div>
         <div class="search">
@@ -112,7 +113,6 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -145,8 +145,7 @@ curl <span class="s2">"http://fooddrivr.com/api/v1/auth"</span>
 <p>Make sure to replace <code class="prettyprint">auth_token</code> with an API token.</p>
 </blockquote>
 
-<p>The API uses JWT based authentication.  You will make a request, with credentials, for a token.
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>The API uses JWT based authentication.  You will make a request, with credentials, for a token.</p>
 
 <p>The Food Drivr API expects for an auth token to be included in all API requests to the server in a header that looks like the following:</p>
 
@@ -258,7 +257,7 @@ Remember - you need to include an auth token!
 <h2 id="get-a-specific-donation">Get a Specific Donation</h2>
 <pre class="highlight ruby"><code>
 </code></pre>
-<pre class="highlight swift"><code>
+<pre class="highlight javascript"><code>
 </code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/v1/donations/2"</span>
   -H <span class="s2">"Authorization: user_token"</span>
@@ -296,7 +295,7 @@ Remember - you need to include an auth token!
 
 <p>This endpoint retrieves a specific donation.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<aside class="warning">Make sure you pass an auth token<code>&lt;code&gt;</code></aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -379,6 +378,7 @@ Remember - you need to include an auth token!
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="javascript">javascript</a>
                 <a href="#" data-language-name="swift">swift</a>
           </div>
       </div>
