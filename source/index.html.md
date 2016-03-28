@@ -4,10 +4,10 @@ title: API Reference
 language_tabs:
   - shell
   - ruby
+  - javascript
   - swift
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -45,7 +45,6 @@ curl "http://fooddrivr.com/api/v1/auth"
 > Make sure to replace `auth_token` with an API token.
 
 The API uses JWT based authentication.  You will make a request, with credentials, for a token.
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
 The Food Drivr API expects for an auth token to be included in all API requests to the server in a header that looks like the following:
 
@@ -152,7 +151,7 @@ Remember - you need to include an auth token!
 
 ```
 
-```swift
+```javascript
 
 ```
 
@@ -193,7 +192,7 @@ curl "http://example.com/api/v1/donations/2"
 
 This endpoint retrieves a specific donation.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<aside class="warning">Make sure you pass an auth token<code>&lt;code&gt;</code></aside>
 
 ### HTTP Request
 
