@@ -321,6 +321,8 @@ Remember - you need to include an auth token!
 
 <p>The Kittn API uses the following error codes:</p>
 
+<h3 id="common-error-codes">Common error codes</h3>
+
 <table><thead>
 <tr>
 <th>Error Code</th>
@@ -329,23 +331,23 @@ Remember - you need to include an auth token!
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>Bad Request &ndash; Your request cannot be understood</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Unauthorized &ndash; Your token is wrong</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Forbidden &ndash; The data requested is hidden for administrators only</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>Not Found &ndash; The specified data could not be found</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>Method Not Allowed &ndash; You tried to access data with an invalid method</td>
 </tr>
 <tr>
 <td>406</td>
@@ -353,7 +355,7 @@ Remember - you need to include an auth token!
 </tr>
 <tr>
 <td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<td>Gone &ndash; The data requested has been removed from our servers</td>
 </tr>
 <tr>
 <td>418</td>
@@ -361,7 +363,7 @@ Remember - you need to include an auth token!
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too much data! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
@@ -369,7 +371,308 @@ Remember - you need to include an auth token!
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+<h3 id="error-codes-in-depth-with-rails-symbols">Error codes in depth, with Rails symbols</h3>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Symbol</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1xx</td>
+<td>Informational</td>
+<td></td>
+</tr>
+<tr>
+<td>100</td>
+<td>Continue</td>
+<td>:continue</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>:switching_protocols</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Processing</td>
+<td>:processing</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2xx Success</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>:ok</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>:created</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>:accepted</td>
+</tr>
+<tr>
+<td>203</td>
+<td>Non-Authoritative Information</td>
+<td>:non_authoritative_information</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>:no_content</td>
+</tr>
+<tr>
+<td>205</td>
+<td>Reset Content</td>
+<td>:reset_content</td>
+</tr>
+<tr>
+<td>206</td>
+<td>Partial Content</td>
+<td>:partial_content</td>
+</tr>
+<tr>
+<td>207</td>
+<td>Multi-Status</td>
+<td>:multi_status</td>
+</tr>
+<tr>
+<td>226</td>
+<td>IM Used</td>
+<td>im_used</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3xx Redirection</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>300</td>
+<td>Multiple Choices</td>
+<td>:multiple_choices</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>:moved_permanently</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>:found</td>
+</tr>
+<tr>
+<td>303</td>
+<td>See Other</td>
+<td>:see_other</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>:not_modified</td>
+</tr>
+<tr>
+<td>305</td>
+<td>Use Proxy</td>
+<td>:use_proxy</td>
+</tr>
+<tr>
+<td>307</td>
+<td>Temporary Redirect</td>
+<td>:temporary_redirect</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4xx Client Error</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>:bad_request</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>:unauthorized</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Payment Required</td>
+<td>:payment_required</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>:forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>:not_found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td>:method_not_allowed</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable</td>
+<td>:not_acceptable</td>
+</tr>
+<tr>
+<td>407</td>
+<td>Proxy Authentication Required</td>
+<td>:proxy_authentication_required</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Timeout</td>
+<td>:request_timeout</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>:conflict</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone</td>
+<td>:gone</td>
+</tr>
+<tr>
+<td>411</td>
+<td>Length Required</td>
+<td>:length_required</td>
+</tr>
+<tr>
+<td>412</td>
+<td>Precondition Failed</td>
+<td>:precondition_failed</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Request Entity Too Large</td>
+<td>:request_entity_too_large</td>
+</tr>
+<tr>
+<td>414</td>
+<td>Request-URI Too Long</td>
+<td>:request_uri_too_long</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type</td>
+<td>:unsupported_media_type</td>
+</tr>
+<tr>
+<td>416</td>
+<td>Requested Range Not Satisfiable</td>
+<td>:requested_range_not_satisfiable</td>
+</tr>
+<tr>
+<td>417</td>
+<td>Expectation Failed</td>
+<td>:expectation_failed</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Unprocessable Entity</td>
+<td>:unprocessable_entity</td>
+</tr>
+<tr>
+<td>423</td>
+<td>Locked</td>
+<td>:locked</td>
+</tr>
+<tr>
+<td>424</td>
+<td>Failed Dependency</td>
+<td>:failed_dependency</td>
+</tr>
+<tr>
+<td>426</td>
+<td>Upgrade Required</td>
+<td>:upgrade_required</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5xx Server Error</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>:internal_server_error</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>:not_implemented</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>:bad_gateway</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>:service_unavailable</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>:gateway_timeout</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP Version Not Supported</td>
+<td>:http_version_not_supported</td>
+</tr>
+<tr>
+<td>507</td>
+<td>Insufficient Storage</td>
+<td>:insufficient_storage</td>
+</tr>
+<tr>
+<td>510</td>
+<td>Not Extended</td>
+<td>:not_extended</td>
 </tr>
 </tbody></table>
 
