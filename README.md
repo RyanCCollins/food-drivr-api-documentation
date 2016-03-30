@@ -1,7 +1,7 @@
-Hacksmiths Food Project API Docs
+## Hacksmiths Food Project API Docs
 
 ## Getting Started
-This site uses middleman, a static site generator.  It uses the Slate application format to generate the docs.  In order to edit it, please see the [index.html.md](https://github.com/teamhacksmiths/food-drivr-api-documentation/blob/master/source/index.html.md) file.  It will parse Markdown into the HTML seen on the website.  Please follow the [Slate documentation](https://github.com/tripit/slate).
+This site uses middleman, a static site generator.  It uses [Slate](https://github.com/tripit/slate) to generate the documentation website.  In order to edit it, please see the [index.html.md](https://github.com/teamhacksmiths/food-drivr-api-documentation/blob/master/source/index.html.md) file.  It will parse Markdown into the HTML seen on the website.  Please follow the [Slate documentation](https://github.com/tripit/slate) if the below instructions do not work for you.
 
 ### Prerequisites
 
