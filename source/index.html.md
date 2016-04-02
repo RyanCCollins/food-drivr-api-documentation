@@ -18,11 +18,37 @@ search: true
 
 # Introduction
 
-Welcome to the Food Drivr API! This documentation should serve as a point of reference for connecting to the API as a user and for interacting with the database.
 
-We have language bindings in Javascript, Ruby, Shell and Swift! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# Registration
+To register, a user will provide their email, a password, name and other information.  On submitting, they request a token which is generated using their email, password, clientID and a secret.  The username and password will be validated by the server before attempting to create an auth token.  If the user exists, or email / password is not valid respond with a failure.   On success, respond with an authentication token.  With the auth token included in the request header, the client will be able to make a request to register the user entity and store their profile information.
 
-This API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+> The request will look something like this
+### URL
+`/api/v1/auth/token`
+
+### Method
+`POST`
+### URL Params
+NONE
+### HTTP Request
+
+### HTTP Response
+
+### Success Reponse
+* **Code**
+* **Content**
+
+### Error Response
+
+### Examples
+```ruby
+
+```
+
+```swift
+
+```
+
 
 # Authentication
 
@@ -50,7 +76,7 @@ The Food Drivr API expects for an auth token to be included in all API requests 
 
 `Authorization: auth_token`
 
-<aside class="notice">
+<asihatde class="notice">
 Note that the auth token is generated when a user registers or authenticates with a username and password.
 </aside>
 
@@ -77,50 +103,112 @@ curl "http://example.com/api/v1/donations"
 [
   {
     "id": 1,
-    "donor_id": "12346",
-    "driver_id": "12345",
-    "coordinates": {
-      "latitude": ,
-      "longitute": ,
-      "accuracy": ,
-      "address_listed":
+    "status": 0,
+    "types": ["Canned Goods", "Microwave Dinners", "Jelly Beans"],
+    "created_at": "2009-06-15T13:45:30",
+    "updated_at" : "2009-06-15T13:45:30",
+    "donor": {
+      "id": 1,
+      "created_at": "2009-06-15T13:45:30",
+      "updated_at" : "2009-06-15T13:45:30",
+      "name": "Ryan Collins",
+      "email": "admin@ryancollins.io",
+      "avatar": "http://cloudinary.com/someurl.png",
+      "phone" : "2223334444",
+      "role": 0
     },
-    "initiated": {
-      "date_time": "2009-06-15T13:45:30"
+    "driver": {
+      "id": 3,
+      "created_at": "2009-06-15T13:45:30",
+      "updated_at" : "2009-06-15T13:45:30",
+      "name": "Harry Potter",
+      "email": "harry@hogwarts.edu",
+      "avatar": "http://cloudinary.com/harrypotter.png",
+      "phone" : "2223334451",
+      "role": 0
+    },
+    "recipient" : {
+      "id" : 1243,
+      "name": "St. Judes",
+      "street_address": "123 Main St.",
+      "city": "Boston",
+      "zip_code" : "11111",
+      "state": "MA",
+      "phone": "2223334444"
     },
     "pickup": {
-      "date_time": "2009-06-15T13:45:30"
+      "latitude": "51.5034070",
+      "longitute": "-0.1275920",
+      "estimated": "2009-06-15T13:45:30",
+      "actual" : "2009-06-15T13:45:30"
+    },
+    "dropoff": {
+      "latitude": "51.5034070",
+      "longitute": "-0.1275920",
+      "estimated": "2009-06-15T13:45:30",
+      "actual" : "2009-06-15T13:45:30"
     },
     "meta": {
       "images": [{
-          "url": "http://someimageurl.com/image.png"
+          "url": "http://cloudinary.com/image.png"
         }, {
-          "url": "http://someimageurl.com/image.png"
+          "url": "http://cloudinary.com/image.png"
       }],
       "description": "Text description about the items donated"
     }
   },
   {
     "id": 2,
-    "donor_id": "12346",
-    "driver_id": "12345",
-    "coordinates": {
-      "latitude": ,
-      "longitute": ,
-      "accuracy": ,
-      "address_listed":
+    "status": 1,
+    "types": ["Canned Goods", "Microwave Dinners", "Jelly Beans"],
+    "created_at": "2009-06-15T13:45:30",
+    "updated_at" : "2009-06-15T13:45:30",
+    "donor": {
+      "id": 1,
+      "created_at": "2009-06-15T13:45:30",
+      "updated_at" : "2009-06-15T13:45:30",
+      "name": "Ryan Collins",
+      "email": "admin@ryancollins.io",
+      "avatar": "http://cloudinary.com/someurl.png",
+      "phone" : "2223334444",
+      "role": 0
     },
-    "initiated": {
-      "date_time": "2009-06-15T13:45:30"
+    "driver": {
+      "id": 3,
+      "created_at": "2009-06-15T13:45:30",
+      "updated_at" : "2009-06-15T13:45:30",
+      "name": "Harry Potter",
+      "email": "harry@hogwarts.edu",
+      "avatar": "http://cloudinary.com/harrypotter.png",
+      "phone" : "2223334451",
+      "role": 0
+    },
+    "recipient" : {
+      "id" : 1243,
+      "name": "St. Judes",
+      "street_address": "123 Main St.",
+      "city": "Boston",
+      "zip_code" : "11111",
+      "state": "MA",
+      "phone": "2223334444"
     },
     "pickup": {
-      "date_time": "2009-06-15T13:45:30"
+      "latitude": "51.5034070",
+      "longitute": "-0.1275920",
+      "estimated": "2009-06-15T13:45:30",
+      "actual" : "2009-06-15T13:45:30"
+    },
+    "dropoff": {
+      "latitude": "51.5034070",
+      "longitute": "-0.1275920",
+      "estimated": "2009-06-15T13:45:30",
+      "actual" : "2009-06-15T13:45:30"
     },
     "meta": {
       "images": [{
-          "url": "http://someimageurl.com/image.png"
+          "url": "http://cloudinary.com/image.png"
         }, {
-          "url": "http://someimageurl.com/image.png"
+          "url": "http://cloudinary.com/image.png"
       }],
       "description": "Text description about the items donated"
     }
@@ -128,21 +216,32 @@ curl "http://example.com/api/v1/donations"
 ]
 ```
 
+
 This endpoint retrieves all donations.
 
 ### HTTP Request
 
 `GET http://example.com/api/v1/donations`
 
+### HTTP Response
+
+
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-completed | false | If set to true, the result will include completed requests.
-date_range |        | If included, will send a specific date range
+status    | 0       | Will return the most recent pending donations
+embedded | false | If included, user relationships are automatically included in the JSON object. i.e. return donor object in JSON vs. donor_id.
 
-<aside class="success">
-Remember - you need to include an auth token!
+<aside class="warning">
+Note: the status must follow the following pattern because the client's expect a numerical value:
+```
+enum Status: Int {
+  pending = 0
+  active = 1
+  completed = 2
+}
+```
 </aside>
 
 ## Get a Specific Donation
