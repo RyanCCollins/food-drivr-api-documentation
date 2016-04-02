@@ -25,42 +25,18 @@ To register, a user will provide their email, a password, name and other informa
 > The request will look something like this
 ### URL
 `/api/v1/auth/token`
-
-### Method
-`POST`
-### URL Params
-NONE
-### HTTP Request
-
-### HTTP Response
-
-### Success Reponse
-* **Code**
-* **Content**
-
+#### **Method**:`POST`
+#### **URL Params**
+#### Request
+### Success Response
+* **2XX**
+* **Auth Token**
 ### Error Response
-
-### Examples
-```ruby
-
-```
-
-```swift
-
-```
-
+* **40X**
 
 # Authentication
 
 > To authorize as a user, you will need to make a request to the server for an access token:
-
-```ruby
-
-```
-
-```swift
-
-```
 
 ```shell
 # With shell, you can just pass the correct header with each request
@@ -68,15 +44,15 @@ curl "http://fooddrivr.com/api/v1/auth"
   -H "Authorization: auth_token"
 ```
 
-> Make sure to replace `auth_token` with an API token.
+> Make sure to replace `auth_token` with the user's token.
 
 The API uses JWT based authentication.  You will make a request, with credentials, for a token.
 
-The Food Drivr API expects for an auth token to be included in all API requests to the server in a header that looks like the following:
+The API expects for an auth token to be included in all API requests to the server in a header that looks like the following:
 
 `Authorization: auth_token`
 
-<asihatde class="notice">
+<aside class="notice">
 Note that the auth token is generated when a user registers or authenticates with a username and password.
 </aside>
 
@@ -107,25 +83,27 @@ curl "http://example.com/api/v1/donations"
     "types": ["Canned Goods", "Microwave Dinners", "Jelly Beans"],
     "created_at": "2009-06-15T13:45:30",
     "updated_at" : "2009-06-15T13:45:30",
-    "donor": {
-      "id": 1,
-      "created_at": "2009-06-15T13:45:30",
-      "updated_at" : "2009-06-15T13:45:30",
-      "name": "Ryan Collins",
-      "email": "admin@ryancollins.io",
-      "avatar": "http://cloudinary.com/someurl.png",
-      "phone" : "2223334444",
-      "role": 0
-    },
-    "driver": {
-      "id": 3,
-      "created_at": "2009-06-15T13:45:30",
-      "updated_at" : "2009-06-15T13:45:30",
-      "name": "Harry Potter",
-      "email": "harry@hogwarts.edu",
-      "avatar": "http://cloudinary.com/harrypotter.png",
-      "phone" : "2223334451",
-      "role": 0
+    "participants": {
+      "donor": {
+        "id": 1,
+        "created_at": "2009-06-15T13:45:30",
+        "updated_at" : "2009-06-15T13:45:30",
+        "name": "Ryan Collins",
+        "email": "admin@ryancollins.io",
+        "avatar": "http://cloudinary.com/someurl.png",
+        "phone" : "2223334444",
+        "role": 0
+      },
+      "driver": {
+        "id": 3,
+        "created_at": "2009-06-15T13:45:30",
+        "updated_at" : "2009-06-15T13:45:30",
+        "name": "Harry Potter",
+        "email": "harry@hogwarts.edu",
+        "avatar": "http://cloudinary.com/harrypotter.png",
+        "phone" : "2223334451",
+        "role": 0
+      }
     },
     "recipient" : {
       "id" : 1243,
@@ -163,25 +141,27 @@ curl "http://example.com/api/v1/donations"
     "types": ["Canned Goods", "Microwave Dinners", "Jelly Beans"],
     "created_at": "2009-06-15T13:45:30",
     "updated_at" : "2009-06-15T13:45:30",
-    "donor": {
-      "id": 1,
-      "created_at": "2009-06-15T13:45:30",
-      "updated_at" : "2009-06-15T13:45:30",
-      "name": "Ryan Collins",
-      "email": "admin@ryancollins.io",
-      "avatar": "http://cloudinary.com/someurl.png",
-      "phone" : "2223334444",
-      "role": 0
-    },
-    "driver": {
-      "id": 3,
-      "created_at": "2009-06-15T13:45:30",
-      "updated_at" : "2009-06-15T13:45:30",
-      "name": "Harry Potter",
-      "email": "harry@hogwarts.edu",
-      "avatar": "http://cloudinary.com/harrypotter.png",
-      "phone" : "2223334451",
-      "role": 0
+    "participants": {
+      "donor": {
+        "id": 1,
+        "created_at": "2009-06-15T13:45:30",
+        "updated_at" : "2009-06-15T13:45:30",
+        "name": "Ryan Collins",
+        "email": "admin@ryancollins.io",
+        "avatar": "http://cloudinary.com/someurl.png",
+        "phone" : "2223334444",
+        "role": 0
+      },
+      "driver": {
+        "id": 3,
+        "created_at": "2009-06-15T13:45:30",
+        "updated_at" : "2009-06-15T13:45:30",
+        "name": "Harry Potter",
+        "email": "harry@hogwarts.edu",
+        "avatar": "http://cloudinary.com/harrypotter.png",
+        "phone" : "2223334451",
+        "role": 0
+      }
     },
     "recipient" : {
       "id" : 1243,
@@ -263,30 +243,63 @@ curl "http://example.com/api/v1/donations/2"
 
 ```json
 {
-  "id": 2,
-  "donor_id": "12346",
-  "driver_id": "12345",
-  "coordinates": {
-    "latitude": ,
-    "longitute": ,
-    "accuracy": ,
-    "address_listed":
+  "id": 1,
+  "status": 0,
+  "types": ["Canned Goods", "Microwave Dinners", "Jelly Beans"],
+  "created_at": "2009-06-15T13:45:30",
+  "updated_at" : "2009-06-15T13:45:30",
+  "participants": {
+    "donor": {
+      "id": 1,
+      "created_at": "2009-06-15T13:45:30",
+      "updated_at" : "2009-06-15T13:45:30",
+      "name": "Ryan Collins",
+      "email": "admin@ryancollins.io",
+      "avatar": "http://cloudinary.com/someurl.png",
+      "phone" : "2223334444",
+      "role": 0
+    },
+    "driver": {
+      "id": 3,
+      "created_at": "2009-06-15T13:45:30",
+      "updated_at" : "2009-06-15T13:45:30",
+      "name": "Harry Potter",
+      "email": "harry@hogwarts.edu",
+      "avatar": "http://cloudinary.com/harrypotter.png",
+      "phone" : "2223334451",
+      "role": 0
+    }
   },
-  "initiated": {
-    "date_time": "2009-06-15T13:45:30"
+  "recipient" : {
+    "id" : 1243,
+    "name": "St. Judes",
+    "street_address": "123 Main St.",
+    "city": "Boston",
+    "zip_code" : "11111",
+    "state": "MA",
+    "phone": "2223334444"
   },
   "pickup": {
-    "date_time": "2009-06-15T13:45:30"
+    "latitude": "51.5034070",
+    "longitute": "-0.1275920",
+    "estimated": "2009-06-15T13:45:30",
+    "actual" : "2009-06-15T13:45:30"
+  },
+  "dropoff": {
+    "latitude": "51.5034070",
+    "longitute": "-0.1275920",
+    "estimated": "2009-06-15T13:45:30",
+    "actual" : "2009-06-15T13:45:30"
   },
   "meta": {
     "images": [{
-        "url": "http://someimageurl.com/image.png"
+        "url": "http://cloudinary.com/image.png"
       }, {
-        "url": "http://someimageurl.com/image.png"
+        "url": "http://cloudinary.com/image.png"
     }],
     "description": "Text description about the items donated"
   }
-},
+}
 ```
 
 This endpoint retrieves a specific donation.
