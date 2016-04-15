@@ -17,6 +17,10 @@ search: true
 ---
 
 # Introduction
+Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session.
+"Content-Type: application/json"
+"Authorization: your_authorization_token"
+
 
 # Registering A User, (aka Create)
 To register a user, you will create a User object containing the User Name, Password, Password Confirmation.  Pass the user object to the User endpoint via the POST method and you will get back a User object with an auth_token.
@@ -40,7 +44,8 @@ password_confirmation | String |
         "name": "Frank Robert",
         "email": "frank@helloworld.com",
         "password": "helloworld1234",
-        "password_confirmation" :"helloworld1234"
+        "password_confirmation" :"helloworld1234",
+        "role_id": 0
     }
 }
 ```
@@ -78,6 +83,7 @@ password_confirmation | String |
 
 The API expects for an auth token to be included in all API requests to the server in a header that looks like the following:
 
+`Content-Type: application/json`
 `Authorization: your_auth_token`
 
 <aside class="notice">
@@ -102,8 +108,10 @@ Error: 4XX
 
 
 ```shell
-curl "http://example.com/api/v1/user/1"
-  -H "Authorization: auth_token"
+curl -v \
+  -H "Content-Type: application/json" \
+  -H "Authorization: auth_token" \
+  "http://example.com/api/v1/user/1"
 ```
 
 ## Update a User
@@ -151,8 +159,10 @@ Error: 4XX
 
 
 ```shell
-curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions"
-  -H "Authorization: auth_token"
+curl -v \
+  -H "Content-Type: application/json" \
+  -H "Authorization: auth_token" \
+  "https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions"
 ```
 
 # Signout the User (Destroy a Session)
@@ -170,22 +180,121 @@ Success: 204, No Content
 Error: 4XX
 
 ```shell
-curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/KoPrTKYYMzqmrEJQsnAb"
-  -H "Authorization: auth_token"
+curl -v \
+  -H "Content-Type: application/json" \
+  -H "Authorization: auth_token" \
+  "https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/KoPrTKYYMzqmrEJQsnAb"
 ```
 
 # Donations
+You can get a list of donations, get a single donation, create a single donation and update a donation.
+<aside class="notice">
+Note: There are several related fields for each donation, such as the Status of the donation and the Type of donation.  Using the related integer value for these fields is the simplest way to interact with the API.
+</aside>
+
+Example for DonationStatus
+```
+enum DonationStatus: Int {
+  PendingAction = 0
+  Accepted = 1
+  Completed = 2
+  Cancelled = 3
+}
+```
 
 ## Get All Donations
 
 ```shell
-curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/donations"
-  -H "Authorization: auth_token"
+curl -v \
+  -H "Content-Type: application/json" \
+  -H "Authorization: auth_token" \
+  "https://wastenotfoodtaxi.herokuapp.com/api/v1/donations"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
+{
+  "donations": [
+    {
+      "id": 2,
+      "description": null,
+      "created_at": "2016-04-09T21:35:00.520Z",
+      "updated_at": "2016-04-09T21:35:00.520Z",
+      "participants": {
+        "donor": {
+          "id": 31,
+          "phone": "(443)512-2849",
+          "name": "Trinity McGlynn",
+          "email": "macey@cummingsauer.info",
+          "avatar": null,
+          "created_at": "2016-04-09T21:34:54.933Z",
+          "updated_at": "2016-04-09T21:34:54.933Z"
+        },
+        "driver": {
+          "id": 73,
+          "phone": "843-958-0149 x6609",
+          "name": "Sandy Hilpert",
+          "email": "jakob.kemmer@hessel.us",
+          "avatar": null,
+          "created_at": "2016-04-09T21:34:58.004Z",
+          "updated_at": "2016-04-09T21:34:58.004Z"
+        }
+      },
+      "pickup": null,
+      "dropoff": null,
+      "donation_types": []
+    },
+    {
+      "id": 3,
+      "description": null,
+      "created_at": "2016-04-09T21:35:00.522Z",
+      "updated_at": "2016-04-09T21:35:00.522Z",
+      "participants": {
+        "donor": {
+          "id": 23,
+          "phone": "(453)995-9600 x36010",
+          "name": "Nathan Muller",
+          "email": "marion.kulas@fritsch.us",
+          "avatar": null,
+          "created_at": "2016-04-09T21:34:54.356Z",
+          "updated_at": "2016-04-09T21:34:54.356Z"
+        },
+        "driver": {
+          "id": 2,
+          "phone": "+1 123 456 789",
+          "name": "Driver User",
+          "email": "driver@hacksmiths.com",
+          "avatar": "http://cloudinary.com/someurl.png",
+          "created_at": "2016-04-09T21:34:52.777Z",
+          "updated_at": "2016-04-09T21:34:52.777Z"
+        }
+      },
+      "recipient": {
+        "id" : 1243,
+        "name": "St. Judes",
+        "street_address": "123 Main St.",
+        "city": "Boston",
+        "zip_code" : "11111",
+        "state": "MA",
+        "phone": "2223334444"
+      },
+      "pickup": {
+        "latitude": "51.5034070",
+        "longitute": "-0.1275920",
+        "estimated": "2009-06-15T13:45:30",
+        "actual" : "2009-06-15T13:45:30"
+      },
+      "dropoff": {
+        "latitude": "51.5034070",
+        "longitute": "-0.1275920",
+        "estimated": "2009-06-15T13:45:30",
+        "actual" : "2009-06-15T13:45:30"
+      },
+      "donation_types": ["Canned Goods", "Pizza"]
+    }]
+  }
+
 [
   {
     "id": 1,
