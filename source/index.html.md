@@ -156,7 +156,23 @@ curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions"
 ```
 
 # Signout the User (Destroy a Session)
+> Getting a user is as simple as making a request with an Auth token.  The user resource is protected to only allow the authenticated user to access their own user data.  
+### URL
+`https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/:id`
 
+#### **Method**:`DELETE`
+#### HTTP Request
+<aside class="notice">
+Note: The id field passed into is the ID of the session, which is your auth_token, not the ID of the user.
+</aside>
+#### HTTP Response
+Success: 204, No Content
+Error: 4XX
+
+```shell
+curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/KoPrTKYYMzqmrEJQsnAb"
+  -H "Authorization: auth_token"
+```
 
 # Donations
 
@@ -295,7 +311,7 @@ This endpoint retrieves all donations.
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/donations`
+`GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations`
 
 ### HTTP Response
 
@@ -329,7 +345,7 @@ enum Status: Int {
 ```
 
 ```shell
-curl "http://example.com/api/v1/donations/2"
+curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id"
   -H "Authorization: user_token"
 ```
 
@@ -402,7 +418,7 @@ This endpoint retrieves a specific donation.
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/donations/<ID>`
+`GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id`
 
 ### URL Parameters
 
