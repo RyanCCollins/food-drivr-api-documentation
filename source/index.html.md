@@ -62,12 +62,15 @@ password_confirmation | String |
     "name": "Ryan Collins",
     "email": "frank@helloworld.com",
     "avatar": null,
-    "role_id": null,
+    "role_id": 0,
     "created_at": "2016-04-14T22:28:46.523Z",
     "updated_at": "2016-04-14T22:28:46.523Z",
     "auth_token": "somerandomstringhere",
     "setting": {
-      TBD
+      "notifications": true,
+      "active": true,
+      "created_at": "2016-04-15T16:11:41.186Z",
+      "updated_at": "2016-04-15T16:11:41.186Z"
     },
     "organization": {
       TBD
@@ -94,7 +97,8 @@ Note: implementation for authorization will change, but this should be enough to
 The users resource is setup primarily to provide a mechanism for interacting with a User's profile.  Most actions taken by a User, either a Donor or A Driver are namespaced so that a Donor and Driver have separate actions they can fulfill via the endpoints.
 
 ## Get a user (aka Show)
-> Getting a user is as simple as making a request with an Auth token.  The user resource is protected to only allow the authenticated user to access their own user data.  
+Getting a user is as simple as making a request with an Auth token.  The user resource is protected to only allow the authenticated user to access their own user data.  
+
 ### URL
 `https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id`
 #### **Method**:`GET`
@@ -106,7 +110,7 @@ id      | Int | The user's id number
 Success: A User object, as shown above
 Error: 4XX
 
-
+> See below for an example request
 ```shell
 curl -v \
   -H "Content-Type: application/json" \
@@ -115,18 +119,43 @@ curl -v \
 ```
 
 ## Update a User
-> Getting a user is as simple as making a request with an Auth token.  The user resource is protected to only allow the authenticated user to access their own user data.  
+To update a user, simply create a PATCH request to the user endpoint.  You will pass in a JSON object containing any of the parameters you need to authenticate.
+
 ### URL
 `https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id`
 #### **Method**:`PATCH`
 #### HTTP Request
 Pass an object that contains all of the User data you want to update.  Must match the User JSON model.
+
+>Sample user object
+```json
+{
+  "user": {
+    "id": 7,
+    "phone": null,
+    "name": "Ryan Collins",
+    "email": "frank@helloworld.com",
+    "avatar": null,
+    "role_id": null,
+    "setting": {
+      TBD
+    },
+    "organization": {
+      TBD
+    },
+    "permissions": {
+      TBD
+    }
+  }
+}
+```
 #### HTTP Response
 Success: 2XX
 Error: 4XX
 
-## Update a User
-> If a user needs to reauthenticate, they can create a session.  This will take a username and a password and will return an auth token that can be used to authenticate protected resources.
+# Sessions
+## Create a Session
+To authenticate or re-authenticate a user, you will want to create a session.  This will take a username and a password and will return an auth token that can be used to authenticate protected resources.
 ### URL
 `https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions`
 #### **Method**:`PATCH`
