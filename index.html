@@ -125,205 +125,6 @@
   <span class="s2">"Authorization: your_authorization_token"</span>
 </code></pre>
 
-<h1 id="create-a-user">Create a User</h1>
-
-<p>To create / register a user, you will create a User object containing the Name, Username, Password and Password Confirmation.  Pass the user object to the users endpoint via the POST method and you will get back a User object with an auth_token.  </p>
-
-<p>Make sure to pass in a role_id.  If the user is a driver, pass in 1, otherwise if they are a donor pass in 0.  We will put a mechanism in place for approving drivers, so expect that you will not get an auth token back if the user is a driver until they are approved.</p>
-
-<blockquote>
-<p>The object that you submit when creating a User will look like this</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Robert"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"password_confirmation"</span><span class="w"> </span><span class="p">:</span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h3 id="url">URL</h3>
-
-<p><code class="prettyprint">POST https://wastenotfoodtaxi.herokuapp.com/api/v1/users</code></p>
-
-<h3 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h3>
-
-<h3 id="url-params"><strong>URL Params</strong></h3>
-
-<h3 id="request">Request</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td>email</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td>password</td>
-<td>String</td>
-<td></td>
-</tr>
-<tr>
-<td>password_confirmation</td>
-<td>String</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<h3 id="success-response">Success Response</h3>
-
-<ul>
-<li><strong>2XX</strong></li>
-<li><strong>User object containing an Auth Token</strong></li>
-</ul>
-
-<blockquote>
-<p>Sample user object</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-14T22:28:46.523Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-14T22:28:46.523Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"auth_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"somerandomstringhere"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"setting"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="err">TBD</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="err">TBD</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h3 id="error-response">Error Response</h3>
-
-<ul>
-<li><strong>40X</strong></li>
-</ul>
-
-<p>The API expects for an auth token to be included in all API requests to the server.</p>
-
-<aside class="notice">
-Note: implementation for authorization will change, but this should be enough to get you going.  I will be implementing an OAuth /token endpoint that will serve to make this process more secure.
-</aside>
-
-<h1 id="users">Users</h1>
-
-<p>The users resource is setup primarily to provide a mechanism for interacting with a User&rsquo;s profile.  Most actions taken by a User, either a Donor or A Driver are namespaced so that a Donor and Driver have separate actions they can fulfill via the endpoints.</p>
-
-<h2 id="get-a-user-aka-show">Get a user (aka Show)</h2>
-
-<p>Getting a user is as simple as making a request with an Auth token.  The user resource is protected to only allow the authenticated user to access their own user data.  </p>
-
-<h3 id="url">URL</h3>
-
-<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id</code></p>
-
-<h4 id="method-get"><strong>Method</strong>:<code class="prettyprint">GET</code></h4>
-
-<h4 id="http-request">HTTP Request</h4>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Int</td>
-<td>The user&rsquo;s id number</td>
-</tr>
-</tbody></table>
-
-<h4 id="http-response">HTTP Response</h4>
-
-<p>Success: A User object, as shown above
-Error: 4XX</p>
-
-<blockquote>
-<p>See below for an example request
-<code class="prettyprint">shell
-curl -v \
-  -H &quot;Content-Type: application/json&quot; \
-  -H &quot;Authorization: auth_token&quot; \
-  &quot;https://wastenotfoodtaxi.herokuapp.com/api/v1/user/3&quot;
-</code></p>
-</blockquote>
-
-<h2 id="update-a-user">Update a User</h2>
-
-<p>To update a user, simply create a PATCH request to the user endpoint.  You will pass in a JSON object containing any of the parameters you need to authenticate.</p>
-
-<h3 id="url">URL</h3>
-
-<p><code class="prettyprint">PATCH https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id</code></p>
-
-<h4 id="method-patch"><strong>Method</strong>:<code class="prettyprint">PATCH</code></h4>
-
-<h4 id="http-request">HTTP Request</h4>
-
-<p>Pass an object that contains all of the User data you want to update.  Must match the User JSON model.</p>
-
-<blockquote>
-<p>Sample user object</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5555555555"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://helloworld.com/helloworld.png"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"setting"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
-    </span><span class="err">}</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="err">TBD</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="err">TBD</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h4 id="http-response">HTTP Response</h4>
-
-<p>Success: 2XX
-Error: 4XX</p>
-
 <h1 id="sessions">Sessions</h1>
 
 <h2 id="create-a-session-sign-in-a-user">Create a Session (sign-in a user)</h2>
@@ -786,6 +587,200 @@ curl -v \
 <td>The ID of the donation to retrieve</td>
 </tr>
 </tbody></table>
+
+          <h1 id="create-a-user">Create a User</h1>
+
+<p>To create / register a user, you will create a User object containing the Name, Username, Password and Password Confirmation.  Pass the user object to the users endpoint via the POST method and you will get back a User object with an auth_token.  </p>
+
+<p>Make sure to pass in a role_id.  If the user is a driver, pass in 1, otherwise if they are a donor pass in 0.  We will put a mechanism in place for approving drivers, so expect that you will not get an auth token back if the user is a driver until they are approved.</p>
+
+<blockquote>
+<p>The object that you submit when creating a User will look like this</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Robert"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"password_confirmation"</span><span class="w"> </span><span class="p">:</span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">POST https://wastenotfoodtaxi.herokuapp.com/api/v1/users</code></p>
+
+<h3 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h3>
+
+<h3 id="url-params"><strong>URL Params</strong></h3>
+
+<h3 id="request">Request</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>password_confirmation</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="success-response">Success Response</h3>
+
+<ul>
+<li><strong>2XX</strong></li>
+<li><strong>User object containing an Auth Token</strong></li>
+</ul>
+
+<blockquote>
+<p>Sample user object</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-14T22:28:46.523Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-14T22:28:46.523Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auth_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"somerandomstringhere"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"setting"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="error-response">Error Response</h3>
+
+<ul>
+<li><strong>40X</strong></li>
+</ul>
+
+<p>The API expects for an auth token to be included in all API requests to the server.</p>
+
+<aside class="notice">
+Note: implementation for authorization will change, but this should be enough to get you going.  I will be implementing an OAuth /token endpoint that will serve to make this process more secure.
+</aside>
+
+<h1 id="users">Users</h1>
+
+<p>The users resource is setup primarily to provide a mechanism for interacting with a User&rsquo;s profile.  Most actions taken by a User, either a Donor or A Driver are namespaced so that a Donor and Driver have separate actions they can fulfill via the endpoints.</p>
+
+<h2 id="get-a-user-aka-show">Get a user (aka show)</h2>
+
+<p>Getting a user is as simple as making a request with an Auth token.  The user resource is protected to only allow the authenticated user to access their own user data.  </p>
+<pre class="highlight shell"><code>curl -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
+  <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/user/3"</span>
+</code></pre>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id</code></p>
+
+<h4 id="method-get"><strong>Method</strong>:<code class="prettyprint">GET</code></h4>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>The user&rsquo;s id number</td>
+</tr>
+</tbody></table>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<p>Success: A User object, as shown above
+Error: 4XX</p>
+
+<h2 id="update-a-user">Update a User</h2>
+
+<p>To update a user, simply create a PATCH request to the user endpoint.  You will pass in a JSON object containing any of the parameters you need to authenticate.</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">PATCH https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id</code></p>
+
+<h4 id="method-patch"><strong>Method</strong>:<code class="prettyprint">PATCH</code></h4>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p>Pass an object that contains all of the User data you want to update.  Must match the User JSON model.</p>
+
+<blockquote>
+<p>Sample user object</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5555555555"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://helloworld.com/helloworld.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"setting"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<p>Success: 2XX
+Error: 4XX</p>
 
           <h1 id="errors">Errors</h1>
 
