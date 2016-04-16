@@ -166,13 +166,13 @@ DELETE is really only used in the context of deleting a Session.  To sign a user
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">POST https://wastenotfoodtaxi.herokuapp.com/api/v1/users</code></p>
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/users</code></p>
 
 <h3 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h3>
 
-<h3 id="url-params"><strong>URL Params</strong></h3>
+<h3 id="http-request">HTTP Request</h3>
 
-<h3 id="request">Request</h3>
+<h4 id="url-params"><strong>URL Params</strong></h4>
 
 <table><thead>
 <tr>
@@ -256,9 +256,9 @@ Note: implementation for authorization will change, but this should be enough to
 
 <p>The users resource is setup primarily to provide a mechanism for interacting with a User&rsquo;s profile.  Most actions taken by a User, either a Donor or A Driver are namespaced so that a Donor and Driver have separate actions they can fulfill via the endpoints.</p>
 
-<h2 id="get-a-user-aka-show">Get a user (aka show)</h2>
+<h2 id="get-a-single-user">Get a Single User</h2>
 
-<p>Getting a user is as simple as making a request with an Auth token.  The user resource is protected to only allow the authenticated user to access their own user data.  </p>
+<p>Getting a user is as simple as making a GET request with an Auth token in the header.  The user resource is protected to only allow the authenticated user to access their own user data.  </p>
 <pre class="highlight shell"><code>curl -v <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
@@ -267,11 +267,11 @@ Note: implementation for authorization will change, but this should be enough to
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id</code></p>
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/users/:auth_token)</code></p>
 
 <h4 id="method-get"><strong>Method</strong>:<code class="prettyprint">GET</code></h4>
 
-<h4 id="http-request">HTTP Request</h4>
+<h3 id="http-request">HTTP Request</h3>
 
 <table><thead>
 <tr>
@@ -281,16 +281,24 @@ Note: implementation for authorization will change, but this should be enough to
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
+<td>auth_token</td>
 <td>Int</td>
-<td>The user&rsquo;s id number</td>
+<td>The user&rsquo;s auth_token</td>
 </tr>
 </tbody></table>
 
-<h4 id="http-response">HTTP Response</h4>
+<h3 id="success-response">Success Response</h3>
 
-<p>Success: A User object, as shown above
-Error: 4XX</p>
+<ul>
+<li>200</li>
+<li>A User object, as shown above</li>
+</ul>
+
+<h3 id="error-response">Error Response</h3>
+
+<ul>
+<li>4XX</li>
+</ul>
 
 <h2 id="update-a-user">Update a User</h2>
 
@@ -298,11 +306,11 @@ Error: 4XX</p>
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">PATCH https://wastenotfoodtaxi.herokuapp.com/api/v1/user/:id</code></p>
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/users/:auth_token</code></p>
 
 <h4 id="method-patch"><strong>Method</strong>:<code class="prettyprint">PATCH</code></h4>
 
-<h4 id="http-request">HTTP Request</h4>
+<h3 id="http-request">HTTP Request</h3>
 
 <p>Pass an object that contains all of the User data you want to update.  Must match the User JSON model.</p>
 
@@ -333,16 +341,19 @@ Error: 4XX</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h4 id="http-response">HTTP Response</h4>
+<h3 id="success-response">Success Response</h3>
 
-<p>Success: 2XX
-Error: 4XX</p>
+<ul>
+<li>2XX
+### Error Response</li>
+<li>4XX</li>
+</ul>
 
           <h1 id="sessions">Sessions</h1>
 
-<h2 id="create-a-session-sign-in-a-user">Create a Session (sign-in a user)</h2>
+<h2 id="create-a-session">Create a Session</h2>
 
-<p>To authenticate or re-authenticate a user, you will want to create a session.  This will take a username and a password and will return an auth token that can be used to authenticate protected resources.</p>
+<p>To signin a user, you will want to create a session.  This will take a username and a password and will return an auth token that can be used to authenticate protected resources.</p>
 
 <h3 id="url">URL</h3>
 
@@ -350,33 +361,32 @@ Error: 4XX</p>
 
 <h4 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h4>
 
-<h4 id="http-request">HTTP Request</h4>
+<h3 id="http-request">HTTP Request</h3>
 
-<p>Pass an object that contains all of the User data you want to update.  Must match the User JSON model.</p>
+<p>You will pass the email address and password as a session JSON object.</p>
 
 <blockquote>
-<p>You will send a JSON object for the session like so.
-<code class="prettyprint">json
-{
-    &quot;session&quot; : {
-        &quot;email&quot;: &quot;frank@helloworld.com&quot;,
-        &quot;password&quot;: &quot;helloworld1234&quot;
-    }
-}
-</code></p>
+<p>You will send a JSON object to create the session as shown below.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"session"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld1234"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h4 id="http-response">HTTP Response</h4>
 
 <p>Success: A User object, as shown above under Registering a User.
 Error: 4XX</p>
-</blockquote>
 <pre class="highlight shell"><code>curl -v <span class="se">\</span>
   -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
   -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
   <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions"</span>
 </code></pre>
 
-<h1 id="signout-the-user-destroy-a-session">Signout the User (Destroy a Session)</h1>
+<h2 id="destroy-a-session">Destroy a Session</h2>
 
 <p>To signout a user, you will need to submit a DELETE request to the sessions endpoint.  Pass in the user&rsquo;s auth token as a URL parameter.  </p>
 
