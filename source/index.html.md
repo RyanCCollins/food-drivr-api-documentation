@@ -3,9 +3,7 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - javascript
-  - swift
+
 
 toc_footers:
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
@@ -19,10 +17,11 @@ search: true
 # Introduction
 Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session.
 
-> Here is an example of your headers
+Checkout the section to to the right for an example of your headers
+
 ```shell
-"Content-Type: application/json"
-"Authorization: your_authorization_token"
+  "Content-Type: application/json"  
+  "Authorization: your_authorization_token"
 ```
 
 # Create a User
@@ -33,9 +32,9 @@ Make sure to pass in a role_id.  If the user is a driver, pass in 1, otherwise i
 
 ### URL
 `POST https://wastenotfoodtaxi.herokuapp.com/api/v1/users`
-#### **Method**:`POST`
-#### **URL Params**
-#### Request
+### **Method**:`POST`
+### **URL Params**
+### Request
 Parameter | Type | Description
 --------- | ------- | -----------
 name      | String  |
@@ -62,6 +61,7 @@ password_confirmation | String |
 * **User object containing an Auth Token**
 
 >Sample user object
+
 ```json
 {
   "user": {
@@ -273,7 +273,7 @@ curl -v \
       },
       "pickup": null,
       "dropoff": null,
-      "donation_types": []
+      "donation_types": ["Canned Goods", "Pizza"]
     },
     {
       "id": 3,
@@ -567,11 +567,9 @@ This endpoint retrieves a specific donation.
 <aside class="warning">Make sure you pass an auth token<code>&lt;code&gt;</code></aside>
 
 ### HTTP Request
-
 `GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id`
 
 ### URL Parameters
-
 Parameter | Description
 --------- | -----------
 ID | The ID of the donation to retrieve
