@@ -15,7 +15,7 @@ search: true
 ---
 
 # Introduction
-Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session.
+Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session, in which case you will not yet have an Auth token.
 
 Checkout the section to to the right for an example of your headers
 
@@ -28,6 +28,20 @@ Checkout the section to to the right for an example of your headers
 To create / register a user, you will create a User object containing the Name, Username, Password and Password Confirmation.  Pass the user object to the users endpoint via the POST method and you will get back a User object with an auth_token.  
 
 Make sure to pass in a role_id.  If the user is a driver, pass in 1, otherwise if they are a donor pass in 0.  We will put a mechanism in place for approving drivers, so expect that you will not get an auth token back if the user is a driver until they are approved.
+
+>The object that you submit when creating a User will look like this
+
+```json
+{
+    "user" : {
+        "name": "Frank Robert",
+        "email": "frank@helloworld.com",
+        "password": "helloworld1234",
+        "password_confirmation" :"helloworld1234",
+        "role_id": 0
+    }
+}
+```
 
 
 ### URL
@@ -42,19 +56,7 @@ email    |   String |
 password | String |
 password_confirmation | String |
 
->The user object will look like this
 
-```json
-{
-    "user" : {
-        "name": "Frank Robert",
-        "email": "frank@helloworld.com",
-        "password": "helloworld1234",
-        "password_confirmation" :"helloworld1234",
-        "role_id": 0
-    }
-}
-```
 
 ### Success Response
 * **2XX**
@@ -133,6 +135,7 @@ To update a user, simply create a PATCH request to the user endpoint.  You will 
 Pass an object that contains all of the User data you want to update.  Must match the User JSON model.
 
 >Sample user object
+
 ```json
 {
   "user": {
