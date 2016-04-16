@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;javascript&quot;,&quot;swift&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,9 +102,6 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-              <a href="#" data-language-name="swift">swift</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -123,13 +120,10 @@
 
 <p>Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session.</p>
 
-<blockquote>
-<p>Here is an example of your headers
-<code class="prettyprint">shell
-&quot;Content-Type: application/json&quot;
-&quot;Authorization: your_authorization_token&quot;
-</code></p>
-</blockquote>
+<p>Checkout the section to to the right for an example of your headers</p>
+<pre class="highlight shell"><code>  <span class="s2">"Content-Type: application/json"</span>  
+  <span class="s2">"Authorization: your_authorization_token"</span>
+</code></pre>
 
 <h1 id="create-a-user">Create a User</h1>
 
@@ -141,11 +135,11 @@
 
 <p><code class="prettyprint">POST https://wastenotfoodtaxi.herokuapp.com/api/v1/users</code></p>
 
-<h4 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h4>
+<h3 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h3>
 
-<h4 id="url-params"><strong>URL Params</strong></h4>
+<h3 id="url-params"><strong>URL Params</strong></h3>
 
-<h4 id="request">Request</h4>
+<h3 id="request">Request</h3>
 
 <table><thead>
 <tr>
@@ -198,41 +192,40 @@
 </ul>
 
 <blockquote>
-<p>Sample user object
-<code class="prettyprint">json
-{
-  &quot;user&quot;: {
-    &quot;id&quot;: 7,
-    &quot;phone&quot;: null,
-    &quot;name&quot;: &quot;Ryan Collins&quot;,
-    &quot;email&quot;: &quot;frank@helloworld.com&quot;,
-    &quot;avatar&quot;: null,
-    &quot;role_id&quot;: 0,
-    &quot;created_at&quot;: &quot;2016-04-14T22:28:46.523Z&quot;,
-    &quot;updated_at&quot;: &quot;2016-04-14T22:28:46.523Z&quot;,
-    &quot;auth_token&quot;: &quot;somerandomstringhere&quot;,
-    &quot;setting&quot;: {
-      &quot;notifications&quot;: true,
-      &quot;active&quot;: true,
-      &quot;created_at&quot;: &quot;2016-04-15T16:11:41.186Z&quot;,
-      &quot;updated_at&quot;: &quot;2016-04-15T16:11:41.186Z&quot;
-    },
-    &quot;organization&quot;: {
-      TBD
-    },
-    &quot;permissions&quot;: {
-      TBD
-    }
-  }
-}
-</code></p>
+<p>Sample user object</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-14T22:28:46.523Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-14T22:28:46.523Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auth_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"somerandomstringhere"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"setting"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h3 id="error-response">Error Response</h3>
 
 <ul>
 <li><strong>40X</strong></li>
 </ul>
-</blockquote>
 
 <p>The API expects for an auth token to be included in all API requests to the server.</p>
 
@@ -1158,9 +1151,6 @@ curl -v \
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-                <a href="#" data-language-name="swift">swift</a>
           </div>
       </div>
     </div>
