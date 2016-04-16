@@ -118,475 +118,31 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session, in which case you will not yet have an Auth token.</p>
+<p>The Hacksmiths Food Drivr API is fairly easy to use.  When in doubt, follow REST principles.</p>
 
-<p>Checkout the section to to the right for an example of your headers</p>
+<p>Most requests require specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session, in which case you will not yet have an Auth token.</p>
+
+<h3 id="rest-amp-http-methods">REST &amp; HTTP Methods</h3>
+
+<p>With this API, there are 4 main HTTP methods you will use.
+* GET
+Get will get you data, either in the form of an array or a singular JSON object.</p>
+
+<ul>
+<li>POST
+POST is used to create resources, i.e. Users, Sessions, Donations, et. al.</li>
+<li>PATCH
+PATCH is used to update one or more parameters of a JSON object.  As long as you use the right parameter names, this should be easy.</li>
+<li>DELETE
+DELETE is really only used in the context of deleting a Session.  To sign a user out and change their auth token, you will send a DELETE request, for example.</li>
+</ul>
+
+<h3 id="headers">Headers</h3>
+
+<p>To the right, you will see an example of your typical headers.</p>
 <pre class="highlight shell"><code>  <span class="s2">"Content-Type: application/json"</span>  
   <span class="s2">"Authorization: your_authorization_token"</span>
 </code></pre>
-
-<h1 id="sessions">Sessions</h1>
-
-<h2 id="create-a-session-sign-in-a-user">Create a Session (sign-in a user)</h2>
-
-<p>To authenticate or re-authenticate a user, you will want to create a session.  This will take a username and a password and will return an auth token that can be used to authenticate protected resources.</p>
-
-<h3 id="url">URL</h3>
-
-<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions</code></p>
-
-<h4 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h4>
-
-<h4 id="http-request">HTTP Request</h4>
-
-<p>Pass an object that contains all of the User data you want to update.  Must match the User JSON model.</p>
-
-<blockquote>
-<p>You will send a JSON object for the session like so.
-<code class="prettyprint">json
-{
-    &quot;session&quot; : {
-        &quot;email&quot;: &quot;frank@helloworld.com&quot;,
-        &quot;password&quot;: &quot;helloworld1234&quot;
-    }
-}
-</code></p>
-
-<h4 id="http-response">HTTP Response</h4>
-
-<p>Success: A User object, as shown above under Registering a User.
-Error: 4XX</p>
-</blockquote>
-<pre class="highlight shell"><code>curl -v <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
-  <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions"</span>
-</code></pre>
-
-<h1 id="signout-the-user-destroy-a-session">Signout the User (Destroy a Session)</h1>
-
-<p>To signout a user, you will need to submit a DELETE request to the sessions endpoint.  Pass in the user&rsquo;s auth token as a URL parameter.  </p>
-
-<h3 id="url">URL</h3>
-
-<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/:id</code></p>
-
-<h4 id="method-delete"><strong>Method</strong>:<code class="prettyprint">DELETE</code></h4>
-
-<h4 id="http-request">HTTP Request</h4>
-
-<aside class="notice">
-Note: The id field passed into is the ID of the session, which is your auth_token, not the ID of the user.
-</aside>
-
-<h4 id="http-response">HTTP Response</h4>
-
-<p>Success: 204, No Content
-Error: 4XX</p>
-<pre class="highlight shell"><code>curl -v <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
-  <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/KoPrTKYYMzqmrEJQsnAb"</span>
-</code></pre>
-
-<h1 id="donations">Donations</h1>
-
-<p>You can get a list of donations, get a single donation, create a single donation and update a donation.
-<aside class="notice">
-Note: There are several related fields for each donation, such as the Status of the donation and the Type of donation.  Using the related integer value for these fields is the simplest way to interact with the API.
-</aside></p>
-
-<p>Example for DonationStatus
-<code class="prettyprint">
-enum DonationStatus: Int {
-  PendingAction = 0
-  Accepted = 1
-  Completed = 2
-  Cancelled = 3
-}
-</code></p>
-
-<h2 id="get-all-donations">Get All Donations</h2>
-
-<p>To get a list of donations, you will need to pass your auth token.  You will get an array of donations (See below).</p>
-<pre class="highlight shell"><code>curl -v <span class="se">\</span>
-  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
-  -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
-  <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/donations"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"donations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.520Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.520Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(443)512-2849"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trinity McGlynn"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"macey@cummingsauer.info"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.933Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.933Z"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"843-958-0149 x6609"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sandy Hilpert"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jakob.kemmer@hessel.us"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:58.004Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:58.004Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pizza"</span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.522Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.522Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(453)995-9600 x36010"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nathan Muller"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"marion.kulas@fritsch.us"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.356Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.356Z"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 123 456 789"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Driver User"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"driver@hacksmiths.com"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/someurl.png"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:52.777Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:52.777Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1243</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"St. Judes"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zip_code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pizza"</span><span class="p">]</span><span class="w">
-    </span><span class="p">}]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-
-</span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Microwave Dinners"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Jelly Beans"</span><span class="p">],</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@ryancollins.io"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/someurl.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harry Potter"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harry@hogwarts.edu"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/harrypotter.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334451"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"recipient"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1243</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"St. Judes"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zip_code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
-      </span><span class="p">}],</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text description about the items donated"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Microwave Dinners"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Jelly Beans"</span><span class="p">],</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@ryancollins.io"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/someurl.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harry Potter"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harry@hogwarts.edu"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/harrypotter.png"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334451"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"recipient"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1243</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"St. Judes"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zip_code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
-      </span><span class="p">}],</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text description about the items donated"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations</code></p>
-
-<h3 id="http-response">HTTP Response</h3>
-
-<p>Success: 2XX and a Donations array as shown above
-Error: 4XX</p>
-
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>status</td>
-<td>0</td>
-<td>Will return the most recent pending donations</td>
-</tr>
-<tr>
-<td>embedded</td>
-<td>true</td>
-<td>If included, user relationships are automatically included in the JSON object. i.e. return donor object in JSON vs. donor_id.</td>
-</tr>
-</tbody></table>
-
-<aside class="warning">
-Note: the status must follow the following pattern because the client&rsquo;s expect a numerical value:
-&ldquo;`
-enum Status: Int {
-  pending = 0
-  active = 1
-  completed = 2
-}
-&rdquo;`
-</aside>
-
-<h2 id="update-a-donation">Update a Donation</h2>
-
-<p>To update a donation, you will submit a PATCH to the donations endpoint.  Submit any parameters that will need to be updated, following the schema above for the donation JSON object.</p>
-
-<blockquote>
-<p>An example request
-<code class="prettyprint">shell
-curl -v \
-  -H &quot;Content-Type: application/json&quot; \
-  -H &quot;Authorization: auth_token&quot; \
-  &quot;https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id&quot;
-</code></p>
-</blockquote>
-
-<aside class="warning">Make sure you pass an auth token in the header<code>&lt;code&gt;</code></aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the donation to update</td>
-</tr>
-<tr>
-<td>Other Donation Params</td>
-<td>Follow the schema defined above for donations</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-a-specific-donation">Get a Specific Donation</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id"</span>
-  -H <span class="s2">"Authorization: user_token"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Microwave Dinners"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Jelly Beans"</span><span class="p">],</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@ryancollins.io"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/someurl.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harry Potter"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harry@hogwarts.edu"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/harrypotter.png"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334451"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"recipient"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1243</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"St. Judes"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zip_code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
-      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
-    </span><span class="p">}],</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text description about the items donated"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific donation.</p>
-
-<aside class="warning">Make sure you pass an auth token<code>&lt;code&gt;</code></aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the donation to retrieve</td>
-</tr>
-</tbody></table>
 
           <h1 id="create-a-user">Create a User</h1>
 
@@ -781,6 +337,370 @@ Error: 4XX</p>
 
 <p>Success: 2XX
 Error: 4XX</p>
+
+          <h1 id="sessions">Sessions</h1>
+
+<h2 id="create-a-session-sign-in-a-user">Create a Session (sign-in a user)</h2>
+
+<p>To authenticate or re-authenticate a user, you will want to create a session.  This will take a username and a password and will return an auth token that can be used to authenticate protected resources.</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions</code></p>
+
+<h4 id="method-post"><strong>Method</strong>:<code class="prettyprint">POST</code></h4>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p>Pass an object that contains all of the User data you want to update.  Must match the User JSON model.</p>
+
+<blockquote>
+<p>You will send a JSON object for the session like so.
+<code class="prettyprint">json
+{
+    &quot;session&quot; : {
+        &quot;email&quot;: &quot;frank@helloworld.com&quot;,
+        &quot;password&quot;: &quot;helloworld1234&quot;
+    }
+}
+</code></p>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<p>Success: A User object, as shown above under Registering a User.
+Error: 4XX</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
+  <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions"</span>
+</code></pre>
+
+<h1 id="signout-the-user-destroy-a-session">Signout the User (Destroy a Session)</h1>
+
+<p>To signout a user, you will need to submit a DELETE request to the sessions endpoint.  Pass in the user&rsquo;s auth token as a URL parameter.  </p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/:id</code></p>
+
+<h4 id="method-delete"><strong>Method</strong>:<code class="prettyprint">DELETE</code></h4>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<aside class="notice">
+Note: The id field passed into is the ID of the session, which is your auth_token, not the ID of the user.
+</aside>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<p>Success: 204, No Content
+Error: 4XX</p>
+<pre class="highlight shell"><code>curl -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
+  <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/KoPrTKYYMzqmrEJQsnAb"</span>
+</code></pre>
+
+          <h1 id="donations">Donations</h1>
+
+<p>You can get a list of donations, get a single donation, create a single donation and update a donation.
+<aside class="notice">
+Note: There are several related fields for each donation, such as the Status of the donation and the Type of donation.  Using the related integer value for these fields is the simplest way to interact with the API.
+</aside></p>
+
+<blockquote>
+<p>Example enum in Ryan (a new programming language) for DonationStatus
+<code class="prettyprint">
+enum DonationStatus: Int {
+  PendingAction = 0
+  Accepted = 1
+  Completed = 2
+  Cancelled = 3
+}
+</code></p>
+</blockquote>
+
+<h2 id="get-all-donations">Get All Donations</h2>
+
+<p>To get a list of donations, submit a GET request to the donations endpoint.  Make sure to include your auth token, as described above.  You will get an array of donations (See below).</p>
+<pre class="highlight shell"><code>curl -v <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -H <span class="s2">"Authorization: auth_token"</span> <span class="se">\</span>
+  <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/donations"</span>
+</code></pre>
+
+<blockquote>
+<p>An example of the data returned from the endpoint is shown below</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"donations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.520Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.520Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(443)512-2849"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trinity McGlynn"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"macey@cummingsauer.info"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.933Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.933Z"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"843-958-0149 x6609"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sandy Hilpert"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jakob.kemmer@hessel.us"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:58.004Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:58.004Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pizza"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.522Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:35:00.522Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(453)995-9600 x36010"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Nathan Muller"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"marion.kulas@fritsch.us"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.356Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:54.356Z"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 123 456 789"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Driver User"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"driver@hacksmiths.com"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/someurl.png"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:52.777Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-09T21:34:52.777Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1243</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"St. Judes"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zip_code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pizza"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations</code></p>
+
+<h3 id="method">Method</h3>
+
+<p>GET</p>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and a Donations array as shown above
+Error: 4XX</p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>0</td>
+<td>Will return the most recent pending donations</td>
+</tr>
+<tr>
+<td>embedded</td>
+<td>true</td>
+<td>If included, user relationships are automatically included in the JSON object. i.e. return donor object in JSON vs. donor_id.</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+Note: the status must follow the following pattern because the client&rsquo;s expect a numerical value:
+&ldquo;`
+enum Status: Int {
+  pending = 0
+  active = 1
+  completed = 2
+}
+&rdquo;`
+</aside>
+
+<h2 id="update-a-donation">Update a Donation</h2>
+
+<p>To update a donation, you will submit a PATCH to the donations endpoint.  Submit any parameters that will need to be updated, following the schema above for the donation JSON object.</p>
+
+<blockquote>
+<p>An example request
+<code class="prettyprint">shell
+curl -v \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Authorization: auth_token&quot; \
+  &quot;https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id&quot;
+</code></p>
+</blockquote>
+
+<aside class="warning">Make sure you pass an auth token in the header<code>&lt;code&gt;</code></aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the donation to update</td>
+</tr>
+<tr>
+<td>Other Donation Params</td>
+<td>Follow the schema defined above for donations</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-specific-donation">Get a Specific Donation</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id"</span>
+  -H <span class="s2">"Authorization: user_token"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Canned Goods"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Microwave Dinners"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Jelly Beans"</span><span class="p">],</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin@ryancollins.io"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/someurl.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harry Potter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harry@hogwarts.edu"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/harrypotter.png"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phone"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334451"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"recipient"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1243</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"St. Judes"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123 Main St."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Boston"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip_code"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"11111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2223334444"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51.5034070"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"longitute"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.1275920"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"actual"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2009-06-15T13:45:30"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
+      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image.png"</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text description about the items donated"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific donation.</p>
+
+<aside class="warning">Make sure you pass an auth token<code>&lt;code&gt;</code></aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the donation to retrieve</td>
+</tr>
+</tbody></table>
+
+          <h1 id="donors">Donors</h1>
+
+          <h1 id="drivers">Drivers</h1>
 
           <h1 id="errors">Errors</h1>
 
