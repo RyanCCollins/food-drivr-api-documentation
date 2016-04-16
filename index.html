@@ -118,7 +118,7 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session.</p>
+<p>Most requests require very specific headers.  Make sure to include the Content-Type header and the Authorization header for any request.  The only exception to this is when you are creating a User or a Session, in which case you will not yet have an Auth token.</p>
 
 <p>Checkout the section to to the right for an example of your headers</p>
 <pre class="highlight shell"><code>  <span class="s2">"Content-Type: application/json"</span>  
@@ -130,6 +130,20 @@
 <p>To create / register a user, you will create a User object containing the Name, Username, Password and Password Confirmation.  Pass the user object to the users endpoint via the POST method and you will get back a User object with an auth_token.  </p>
 
 <p>Make sure to pass in a role_id.  If the user is a driver, pass in 1, otherwise if they are a donor pass in 0.  We will put a mechanism in place for approving drivers, so expect that you will not get an auth token back if the user is a driver until they are approved.</p>
+
+<blockquote>
+<p>The object that you submit when creating a User will look like this</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Robert"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"password_confirmation"</span><span class="w"> </span><span class="p">:</span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h3 id="url">URL</h3>
 
@@ -169,20 +183,6 @@
 <td></td>
 </tr>
 </tbody></table>
-
-<blockquote>
-<p>The user object will look like this</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Frank Robert"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"password_confirmation"</span><span class="w"> </span><span class="p">:</span><span class="s2">"helloworld1234"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <h3 id="success-response">Success Response</h3>
 
@@ -293,37 +293,36 @@ curl -v \
 <p>Pass an object that contains all of the User data you want to update.  Must match the User JSON model.</p>
 
 <blockquote>
-<p>Sample user object
-<code class="prettyprint">json
-{
-  &quot;user&quot;: {
-    &quot;id&quot;: 7,
-    &quot;phone&quot;: &quot;5555555555&quot;,
-    &quot;name&quot;: &quot;Ryan Collins&quot;,
-    &quot;email&quot;: &quot;frank@helloworld.com&quot;,
-    &quot;avatar&quot;: &quot;http://helloworld.com/helloworld.png&quot;,
-    &quot;role_id&quot;: 0,
-    &quot;setting&quot;: {
-      &quot;notifications&quot;: true,
-      &quot;active&quot;: true,
-      &quot;created_at&quot;: &quot;2016-04-15T16:11:41.186Z&quot;,
-      &quot;updated_at&quot;: &quot;2016-04-15T16:11:41.186Z&quot;,
-    },
-    &quot;organization&quot;: {
-      TBD
-    },
-    &quot;permissions&quot;: {
-      TBD
-    }
-  }
-}
-</code></p>
+<p>Sample user object</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5555555555"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ryan Collins"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"frank@helloworld.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://helloworld.com/helloworld.png"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"role_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"setting"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"notifications"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-15T16:11:41.186Z"</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="err">TBD</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h4 id="http-response">HTTP Response</h4>
 
 <p>Success: 2XX
 Error: 4XX</p>
-</blockquote>
 
 <h1 id="sessions">Sessions</h1>
 
