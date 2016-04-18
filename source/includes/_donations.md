@@ -31,93 +31,152 @@ curl -v \
 {
   "donations": [
     {
-      "id": 2,
-      "description": null,
-      "created_at": "2016-04-09T21:35:00.520Z",
-      "updated_at": "2016-04-09T21:35:00.520Z",
+      "id": 1,
+      "description": "American apparel before they sold out brunch art sustainable locavore banh mi.",
+      "created_at": "2016-04-17T18:31:13.958Z",
+      "status_id": 3,
+      "updated_at": "2016-04-17T18:31:13.958Z",
       "participants": {
         "donor": {
-          "id": 31,
-          "phone": "(443)512-2849",
-          "name": "Trinity McGlynn",
-          "email": "macey@cummingsauer.info",
+          "id": 100,
+          "phone": "(444)523-6939 x15071",
+          "name": "Manuela Steuber",
+          "email": "arlo_mann@graham.ca",
           "avatar": null,
-          "created_at": "2016-04-09T21:34:54.933Z",
-          "updated_at": "2016-04-09T21:34:54.933Z"
+          "created_at": "2016-04-17T18:31:09.818Z",
+          "updated_at": "2016-04-17T18:31:09.818Z"
         },
         "driver": {
-          "id": 73,
-          "phone": "843-958-0149 x6609",
-          "name": "Sandy Hilpert",
-          "email": "jakob.kemmer@hessel.us",
+          "id": 46,
+          "phone": "1-612-279-6059 x648",
+          "name": "Alivia Baumbach",
+          "email": "hellen.boyer@stark.biz",
           "avatar": null,
-          "created_at": "2016-04-09T21:34:58.004Z",
-          "updated_at": "2016-04-09T21:34:58.004Z"
+          "created_at": "2016-04-17T18:31:03.037Z",
+          "updated_at": "2016-04-17T18:31:03.037Z"
         }
       },
+      "donation_types": ["Jujube", "Lime"],
       "pickup": {
-        "latitude": "51.5034070",
-        "longitute": "-0.1275920",
-        "estimated": "2009-06-15T13:45:30",
-        "actual" : "2009-06-15T13:45:30"
+        "id": 1,
+        "estimated": "2013-02-08T00:00:00.000Z",
+        "actual": "2012-08-21T00:00:00.000Z",
+        "latitude": "40.5998084143",
+        "longitude": "-73.971638773",
+        "created_at": "2016-04-17T18:31:14.906Z",
+        "updated_at": "2016-04-17T18:31:14.906Z",
+        "donation_id": 1,
+        "street_address": "7272 Aron Green",
+        "street_address_two": "Suite 919",
+        "city": "Port Ludie",
+        "state": "Montana",
+        "zip": "82184"
       },
       "dropoff": {
-        "latitude": "51.5034070",
-        "longitute": "-0.1275920",
-        "estimated": "2009-06-15T13:45:30",
-        "actual" : "2009-06-15T13:45:30"
-      },
-      "donation_types": ["Canned Goods", "Pizza"]
-    },
-    {
-      "id": 3,
-      "description": null,
-      "created_at": "2016-04-09T21:35:00.522Z",
-      "updated_at": "2016-04-09T21:35:00.522Z",
-      "participants": {
-        "donor": {
-          "id": 23,
-          "phone": "(453)995-9600 x36010",
-          "name": "Nathan Muller",
-          "email": "marion.kulas@fritsch.us",
-          "avatar": null,
-          "created_at": "2016-04-09T21:34:54.356Z",
-          "updated_at": "2016-04-09T21:34:54.356Z"
-        },
-        "driver": {
-          "id": 2,
-          "phone": "+1 123 456 789",
-          "name": "Driver User",
-          "email": "driver@hacksmiths.com",
-          "avatar": "http://cloudinary.com/someurl.png",
-          "created_at": "2016-04-09T21:34:52.777Z",
-          "updated_at": "2016-04-09T21:34:52.777Z"
-        }
+        "id": 1,
+        "estimated": "2014-03-11T00:00:00.000Z",
+        "actual": "2013-09-02T00:00:00.000Z",
+        "latitude": "34.3823767403",
+        "longitude": "-81.611008",
+        "created_at": "2016-04-17T18:31:14.936Z",
+        "updated_at": "2016-04-17T18:31:14.936Z",
+        "donation_id": 1,
+        "street_address": "7284 Omer Manors",
+        "street_address_two": "Suite 199",
+        "city": "Reichertchester",
+        "state": "Vermont",
+        "zip": "52878"
       },
       "recipient": {
-        "id" : 1243,
-        "name": "St. Judes",
-        "street_address": "123 Main St.",
-        "city": "Boston",
-        "zip_code" : "11111",
-        "state": "MA",
-        "phone": "2223334444"
+        "id": 84,
+        "name": "Kozey, Sauer and Koss",
+        "street_address": "887 McDermott Corner",
+        "street_address_two": "Suite 169",
+        "city": "South Benjaminport",
+        "phone": null,
+        "created_at": "2016-04-17T18:31:13.475Z",
+        "updated_at": "2016-04-17T18:31:13.475Z",
+        "state": "Connecticut",
+        "zip": "60759"
       },
+      "images": ["http://cloudinary.com/image.png", "http://cloudinary.com/image2.png"]
+    },
+    {
+      "id": 2,
+      "description": "Cardigan Pitchfork cliche locavore Wes Anderson biodiesel butcher PBR.",
+      "created_at": "2016-04-17T18:31:13.966Z",
+      "status_id": 2,
+      "updated_at": "2016-04-17T18:31:13.966Z",
+      "participants": {
+        "donor": {
+          "id": 7,
+          "phone": "261-917-1247 x195",
+          "name": "Isabelle Keebler",
+          "email": "william_gutkowski@brekke.ca",
+          "avatar": null,
+          "created_at": "2016-04-17T18:30:58.804Z",
+          "updated_at": "2016-04-17T18:30:58.804Z"
+        },
+        "driver": {
+          "id": 95,
+          "phone": "716-919-7270",
+          "name": "Matilde Becker",
+          "email": "isac@schroederswift.biz",
+          "avatar": null,
+          "created_at": "2016-04-17T18:31:08.840Z",
+          "updated_at": "2016-04-17T18:31:08.840Z"
+        }
+      },
+      "donation_types": [
+        "Jambul",
+        "Lime"
+      ],
       "pickup": {
-        "latitude": "51.5034070",
-        "longitute": "-0.1275920",
-        "estimated": "2009-06-15T13:45:30",
-        "actual" : "2009-06-15T13:45:30"
+        "id": 2,
+        "estimated": "2015-06-26T00:00:00.000Z",
+        "actual": "2013-05-06T00:00:00.000Z",
+        "latitude": "26.1180992126",
+        "longitude": "-90.3760452271",
+        "created_at": "2016-04-17T18:31:14.963Z",
+        "updated_at": "2016-04-17T18:31:14.963Z",
+        "donation_id": 2,
+        "street_address": "83882 Deion Circle",
+        "street_address_two": "Apt. 460",
+        "city": "Hackettview",
+        "state": "Idaho",
+        "zip": "63475"
       },
       "dropoff": {
-        "latitude": "51.5034070",
-        "longitute": "-0.1275920",
-        "estimated": "2009-06-15T13:45:30",
-        "actual" : "2009-06-15T13:45:30"
+        "id": 2,
+        "estimated": "2014-12-18T00:00:00.000Z",
+        "actual": "2015-03-25T00:00:00.000Z",
+        "latitude": "36.2345447488",
+        "longitude": "-118.0646387827",
+        "created_at": "2016-04-17T18:31:14.972Z",
+        "updated_at": "2016-04-17T18:31:14.972Z",
+        "donation_id": 2,
+        "street_address": "724 Obie Drive",
+        "street_address_two": "Suite 589",
+        "city": "Eulaton",
+        "state": "North Dakota",
+        "zip": "65220"
       },
-      "donation_types": ["Canned Goods", "Pizza"]
-    }]
-  }
+      "recipient": {
+        "id": 79,
+        "name": "McClure-Hills",
+        "street_address": "9293 Stamm Port",
+        "street_address_two": "Apt. 066",
+        "city": "New Tobyberg",
+        "phone": null,
+        "created_at": "2016-04-17T18:31:13.448Z",
+        "updated_at": "2016-04-17T18:31:13.448Z",
+        "state": "California",
+        "zip": "57564"
+      },
+      "images": ["http://cloudinary.com/image.png", "http://cloudinary.com/image2.png"]
+    }
+  ]
+}
 ```
 
 ### HTTP Request
@@ -180,61 +239,79 @@ curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id"
 
 ```json
 {
-  "id": 1,
-  "status": 0,
-  "types": ["Canned Goods", "Microwave Dinners", "Jelly Beans"],
-  "created_at": "2009-06-15T13:45:30",
-  "updated_at" : "2009-06-15T13:45:30",
-  "participants": {
-    "donor": {
-      "id": 1,
-      "created_at": "2009-06-15T13:45:30",
-      "updated_at" : "2009-06-15T13:45:30",
-      "name": "Ryan Collins",
-      "email": "admin@ryancollins.io",
-      "avatar": "http://cloudinary.com/someurl.png",
-      "phone" : "2223334444",
-      "role": 0
+  "donation": {
+    "id": 2,
+    "description": "Cardigan Pitchfork cliche locavore Wes Anderson biodiesel butcher PBR.",
+    "created_at": "2016-04-17T18:31:13.966Z",
+    "status_id": 2,
+    "updated_at": "2016-04-17T18:31:13.966Z",
+    "participants": {
+      "donor": {
+        "id": 7,
+        "phone": "261-917-1247 x195",
+        "name": "Isabelle Keebler",
+        "email": "william_gutkowski@brekke.ca",
+        "avatar": null,
+        "created_at": "2016-04-17T18:30:58.804Z",
+        "updated_at": "2016-04-17T18:30:58.804Z"
+      },
+      "driver": {
+        "id": 95,
+        "phone": "716-919-7270",
+        "name": "Matilde Becker",
+        "email": "isac@schroederswift.biz",
+        "avatar": null,
+        "created_at": "2016-04-17T18:31:08.840Z",
+        "updated_at": "2016-04-17T18:31:08.840Z"
+      }
     },
-    "driver": {
-      "id": 3,
-      "created_at": "2009-06-15T13:45:30",
-      "updated_at" : "2009-06-15T13:45:30",
-      "name": "Harry Potter",
-      "email": "harry@hogwarts.edu",
-      "avatar": "http://cloudinary.com/harrypotter.png",
-      "phone" : "2223334451",
-      "role": 0
-    }
-  },
-  "recipient" : {
-    "id" : 1243,
-    "name": "St. Judes",
-    "street_address": "123 Main St.",
-    "city": "Boston",
-    "zip_code" : "11111",
-    "state": "MA",
-    "phone": "2223334444"
-  },
-  "pickup": {
-    "latitude": "51.5034070",
-    "longitute": "-0.1275920",
-    "estimated": "2009-06-15T13:45:30",
-    "actual" : "2009-06-15T13:45:30"
-  },
-  "dropoff": {
-    "latitude": "51.5034070",
-    "longitute": "-0.1275920",
-    "estimated": "2009-06-15T13:45:30",
-    "actual" : "2009-06-15T13:45:30"
-  },
-  "meta": {
-    "images": [{
-        "url": "http://cloudinary.com/image.png"
-      }, {
-        "url": "http://cloudinary.com/image.png"
-    }],
-    "description": "Text description about the items donated"
+    "donation_types": [
+      "Jambul",
+      "Lime"
+    ],
+    "pickup": {
+      "id": 2,
+      "estimated": "2015-06-26T00:00:00.000Z",
+      "actual": "2013-05-06T00:00:00.000Z",
+      "latitude": "26.1180992126",
+      "longitude": "-90.3760452271",
+      "created_at": "2016-04-17T18:31:14.963Z",
+      "updated_at": "2016-04-17T18:31:14.963Z",
+      "donation_id": 2,
+      "street_address": "83882 Deion Circle",
+      "street_address_two": "Apt. 460",
+      "city": "Hackettview",
+      "state": "Idaho",
+      "zip": "63475"
+    },
+    "dropoff": {
+      "id": 2,
+      "estimated": "2014-12-18T00:00:00.000Z",
+      "actual": "2015-03-25T00:00:00.000Z",
+      "latitude": "36.2345447488",
+      "longitude": "-118.0646387827",
+      "created_at": "2016-04-17T18:31:14.972Z",
+      "updated_at": "2016-04-17T18:31:14.972Z",
+      "donation_id": 2,
+      "street_address": "724 Obie Drive",
+      "street_address_two": "Suite 589",
+      "city": "Eulaton",
+      "state": "North Dakota",
+      "zip": "65220"
+    },
+    "recipient": {
+      "id": 79,
+      "name": "McClure-Hills",
+      "street_address": "9293 Stamm Port",
+      "street_address_two": "Apt. 066",
+      "city": "New Tobyberg",
+      "phone": null,
+      "created_at": "2016-04-17T18:31:13.448Z",
+      "updated_at": "2016-04-17T18:31:13.448Z",
+      "state": "California",
+      "zip": "57564"
+    },
+    "images": ["http://cloudinary.com/image.png", "http://cloudinary.com/image2.png"]
   }
 }
 ```
