@@ -791,7 +791,209 @@ curl -v \
 
 <p>Drivers have a few main actions they can take to initiate a pickup, change the status of a donation and dropoff the food.</p>
 
-<p>When a donation is created, the location where the food will be picked up is set.  To pickup a donation, a driver will accept the donation.  At each step along the way, the driver sends status updates to the server.  Actions that can be accomplished by a driver include: accept to pickup the food, </p>
+<p>When a donation is created, the location where the food will be picked up is set based on the Donor&rsquo;s default address.  If they do not have a default address, you&rsquo;ll need to submit a location along with the donation to be specific.  We do not want Driver&rsquo;s picking up food at the wrong location, so all of the client&rsquo;s need a verify your address step.  To pickup a donation, a driver will accept the donation.  At each step along the way, the driver sends status updates to the server.  Actions that can be accomplished by a driver include: accept to pickup the food,</p>
+
+<h2 id="check-status-of-a-non-approved-driver">Check Status of A Non-Approved Driver</h2>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/status</code></p>
+
+<h4 id="method-get"><strong>Method</strong>:<code class="prettyprint">GET</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<p>Success: 2XX + an active field, showing if the driver has yet to be activated
+Error: 4XX</p>
+
+<blockquote>
+<p>An example of the JSON received back from a status check
+<code class="prettyprint">json
+{
+  &quot;active&quot;: false
+}
+</code></p>
+</blockquote>
+
+<h1 id="driver-donations">Driver Donations</h1>
+
+<h2 id="get-all-donations-pending-accepted-completed-cancelled">Get All Donations (Pending, Accepted, Completed, Cancelled)</h2>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/donations/all</code></p>
+
+<h4 id="method-get"><strong>METHOD</strong>: <code class="prettyprint">GET</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and an array of Donations, All Pending, and all attached to a Driver</p>
+
+<h2 id="get-all-pending-donations">Get all Pending Donations</h2>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/donations/pending</code></p>
+
+<h4 id="method-get"><strong>METHOD</strong>: <code class="prettyprint">GET</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>N/A</p>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and an array of Donations, All Pending
+Error: 4XX</p>
+
+<h2 id="get-all-accepted-donations-attached-to-a-driver">Get all Accepted Donations Attached to a Driver</h2>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/donations/accepted</code></p>
+
+<h4 id="method-get"><strong>METHOD</strong>: <code class="prettyprint">GET</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>N/A</p>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and an array of Donations, All Accepted</p>
+
+<h2 id="get-all-pending-donations-and-all-donations-tied-to-a-driver">Get all Pending Donations and all Donations tied to a Driver</h2>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/donations/all</code></p>
+
+<h4 id="method-get"><strong>METHOD</strong>: <code class="prettyprint">GET</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>N/A</p>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and an array of Donations, All Completed</p>
+
+<h2 id="get-all-cancelled-donations">Get all Cancelled Donations</h2>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/donations/cancelled</code></p>
+
+<h4 id="method-get"><strong>METHOD</strong>: <code class="prettyprint">GET</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>N/A</p>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and an array of Donations, All Cancelled</p>
+
+<h3 id="get-a-single-donation-by-id">Get a Single Donation by ID</h3>
+
+<aside class="notice">
+Note: if the donation is assigned to another Driver, you will get a 403 Forbidden.  If the donation is not assigned or belongs to the Driver, you will get back a Donation.
+</aside>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/donations/:donation_id</code></p>
+
+<h4 id="method-get"><strong>METHOD</strong>: <code class="prettyprint">GET</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p>N/A</p>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and a single Donation
+Error: 403 if the Donation belongs to another driver.</p>
+
+<h2 id="update-the-status-of-a-single-donation">Update the Status of a Single Donation</h2>
+
+<p>To update the status of a donation, send a request to POST</p>
+
+<h3 id="url">URL</h3>
+
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/driver/donations/:donation_id/status</code></p>
+
+<h4 id="method-post"><strong>METHOD</strong>: <code class="prettyprint">POST</code></h4>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<blockquote>
+<p>Note: The below objects match the three status fields to the status updates a driver will send.</p>
+
+<p>Pending
+<code class="prettyprint">
+{
+    &quot;status&quot;: {
+        &quot;donation_status&quot;: 0,
+        &quot;pickup_status&quot;: 0,
+        &quot;dropoff_status&quot;: 0
+    }
+}
+</code></p>
+
+<p>Accepted by driver, but not yet picked up
+<code class="prettyprint">json
+{
+    &quot;status&quot;: {
+        &quot;donation_status&quot;: 1,
+        &quot;pickup_status&quot;: 1,
+        &quot;dropoff_status&quot;: 1
+    }
+}
+</code></p>
+
+<p>Picked up by driver
+<code class="prettyprint">json
+{
+    &quot;status&quot;: {
+        &quot;donation_status&quot;: 1,
+        &quot;pickup_status&quot;: 2,
+        &quot;dropoff_status&quot;: 1
+    }
+}
+</code></p>
+
+<p>Dropped off by driver
+<code class="prettyprint">json
+{
+    &quot;status&quot;: {
+        &quot;donation_status&quot;: 2,
+        &quot;pickup_status&quot;: 2,
+        &quot;dropoff_status&quot;: 2
+    }
+}
+</code></p>
+
+<p>Cancelled:
+Note, a 4 in any status field will set the status of the rest to 4
+<code class="prettyprint">json
+{
+    &quot;status&quot;: {
+        &quot;donation_status&quot;: 4,
+        &quot;pickup_status&quot;: 4,
+        &quot;dropoff_status&quot;: 4
+    }
+}
+</code></p>
+</blockquote>
+
+<h3 id="http-response">HTTP Response</h3>
+
+<p>Success: 2XX and an array of Donations, All Cancelled</p>
 
           <h1 id="errors">Errors</h1>
 
