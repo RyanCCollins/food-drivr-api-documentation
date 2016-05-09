@@ -35,7 +35,7 @@ curl -v \
 To signout a user, you will need to submit a DELETE request to the sessions endpoint.  Pass in the user's auth token as a URL parameter.  
 
 ### URL
-`https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/:id`
+`https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/:auth_token`
 
 #### **Method**:`DELETE`
 #### HTTP Request

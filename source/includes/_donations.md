@@ -31,150 +31,220 @@ curl -v \
 {
   "donations": [
     {
-      "id": 1,
-      "description": "American apparel before they sold out brunch art sustainable locavore banh mi.",
-      "created_at": "2016-04-17T18:31:13.958Z",
-      "status_id": 3,
-      "updated_at": "2016-04-17T18:31:13.958Z",
-      "participants": {
-        "donor": {
-          "id": 100,
-          "phone": "(444)523-6939 x15071",
-          "name": "Manuela Steuber",
-          "email": "arlo_mann@graham.ca",
-          "avatar": null,
-          "created_at": "2016-04-17T18:31:09.818Z",
-          "updated_at": "2016-04-17T18:31:09.818Z"
-        },
-        "driver": {
-          "id": 46,
-          "phone": "1-612-279-6059 x648",
-          "name": "Alivia Baumbach",
-          "email": "hellen.boyer@stark.biz",
-          "avatar": null,
-          "created_at": "2016-04-17T18:31:03.037Z",
-          "updated_at": "2016-04-17T18:31:03.037Z"
-        }
-      },
-      "donation_types": ["Jujube", "Lime"],
-      "pickup": {
-        "id": 1,
-        "estimated": "2013-02-08T00:00:00.000Z",
-        "actual": "2012-08-21T00:00:00.000Z",
-        "latitude": "40.5998084143",
-        "longitude": "-73.971638773",
-        "created_at": "2016-04-17T18:31:14.906Z",
-        "updated_at": "2016-04-17T18:31:14.906Z",
-        "donation_id": 1,
-        "street_address": "7272 Aron Green",
-        "street_address_two": "Suite 919",
-        "city": "Port Ludie",
-        "state": "Montana",
-        "zip": "82184"
-      },
-      "dropoff": {
-        "id": 1,
-        "estimated": "2014-03-11T00:00:00.000Z",
-        "actual": "2013-09-02T00:00:00.000Z",
-        "latitude": "34.3823767403",
-        "longitude": "-81.611008",
-        "created_at": "2016-04-17T18:31:14.936Z",
-        "updated_at": "2016-04-17T18:31:14.936Z",
-        "donation_id": 1,
-        "street_address": "7284 Omer Manors",
-        "street_address_two": "Suite 199",
-        "city": "Reichertchester",
-        "state": "Vermont",
-        "zip": "52878"
-      },
-      "recipient": {
-        "id": 84,
-        "name": "Kozey, Sauer and Koss",
-        "street_address": "887 McDermott Corner",
-        "street_address_two": "Suite 169",
-        "city": "South Benjaminport",
-        "phone": null,
-        "created_at": "2016-04-17T18:31:13.475Z",
-        "updated_at": "2016-04-17T18:31:13.475Z",
-        "state": "Connecticut",
-        "zip": "60759"
-      },
-      "images": ["http://cloudinary.com/image.png", "http://cloudinary.com/image2.png"]
-    },
-    {
-      "id": 2,
-      "description": "Cardigan Pitchfork cliche locavore Wes Anderson biodiesel butcher PBR.",
-      "created_at": "2016-04-17T18:31:13.966Z",
-      "status_id": 2,
-      "updated_at": "2016-04-17T18:31:13.966Z",
-      "participants": {
-        "donor": {
-          "id": 7,
-          "phone": "261-917-1247 x195",
-          "name": "Isabelle Keebler",
-          "email": "william_gutkowski@brekke.ca",
-          "avatar": null,
-          "created_at": "2016-04-17T18:30:58.804Z",
-          "updated_at": "2016-04-17T18:30:58.804Z"
-        },
-        "driver": {
-          "id": 95,
-          "phone": "716-919-7270",
-          "name": "Matilde Becker",
-          "email": "isac@schroederswift.biz",
-          "avatar": null,
-          "created_at": "2016-04-17T18:31:08.840Z",
-          "updated_at": "2016-04-17T18:31:08.840Z"
-        }
-      },
-      "donation_types": [
-        "Jambul",
-        "Lime"
-      ],
-      "pickup": {
-        "id": 2,
-        "estimated": "2015-06-26T00:00:00.000Z",
-        "actual": "2013-05-06T00:00:00.000Z",
-        "latitude": "26.1180992126",
-        "longitude": "-90.3760452271",
-        "created_at": "2016-04-17T18:31:14.963Z",
-        "updated_at": "2016-04-17T18:31:14.963Z",
-        "donation_id": 2,
-        "street_address": "83882 Deion Circle",
-        "street_address_two": "Apt. 460",
-        "city": "Hackettview",
-        "state": "Idaho",
-        "zip": "63475"
-      },
-      "dropoff": {
-        "id": 2,
-        "estimated": "2014-12-18T00:00:00.000Z",
-        "actual": "2015-03-25T00:00:00.000Z",
-        "latitude": "36.2345447488",
-        "longitude": "-118.0646387827",
-        "created_at": "2016-04-17T18:31:14.972Z",
-        "updated_at": "2016-04-17T18:31:14.972Z",
-        "donation_id": 2,
-        "street_address": "724 Obie Drive",
-        "street_address_two": "Suite 589",
-        "city": "Eulaton",
-        "state": "North Dakota",
-        "zip": "65220"
-      },
-      "recipient": {
-        "id": 79,
-        "name": "McClure-Hills",
-        "street_address": "9293 Stamm Port",
-        "street_address_two": "Apt. 066",
-        "city": "New Tobyberg",
-        "phone": null,
-        "created_at": "2016-04-17T18:31:13.448Z",
-        "updated_at": "2016-04-17T18:31:13.448Z",
-        "state": "California",
-        "zip": "57564"
-      },
-      "images": ["http://cloudinary.com/image.png", "http://cloudinary.com/image2.png"]
-    }
+       "id": 7,
+       "description": "Legacy description field before items were added. Ignore.",
+       "note": "Make sure to pull around back",
+       "created_at": "2016-05-07T23:45:50.287Z",
+       "updated_at": "2016-05-07T23:45:50.287Z",
+       "status_id": 1,
+       "status": {
+         "id": 1,
+         "description": "Accepted"
+       },
+       "participants": {
+         "donor": {
+           "id": 1,
+           "phone": "+1 123 456 789",
+           "name": "Donor User",
+           "email": "donor@hacksmiths.com",
+           "avatar": null
+         },
+         "driver": {
+           "id": 74,
+           "phone": "1-775-894-8780",
+           "name": "Gennaro Rau",
+           "email": "nya@beattysmitham.name",
+           "avatar": null
+         }
+       },
+       "pickup": {
+         "estimated": null,
+         "actual": null,
+         "latitude": "0.0",
+         "longitude": "0.0",
+         "street_address": null,
+         "street_address_two": null,
+         "city": null,
+         "state": null,
+         "zip": null,
+         "status": {
+           "id": 0,
+           "description": "Pending"
+         },
+         "status_id": 0
+       },
+       "dropoff": {
+         "estimated": "2014-01-23T00:00:00.000Z",
+         "actual": "2016-03-01T00:00:00.000Z",
+         "latitude": "40.8377346033",
+         "longitude": "-81.611008",
+         "street_address": "13831 Youth Street Northwest",
+         "street_address_two": "Apt. 558",
+         "city": "North Lawrence",
+         "state": "Ohio",
+         "zip": "44666",
+         "status": {
+           "id": 0,
+           "description": "Pending"
+         },
+         "status_id": 0
+       },
+       "recipient": {
+         "id": 5,
+         "name": "Christiansen, Crona and West",
+         "street_address": "80324 Marcellus Centers",
+         "street_address_two": "Suite 947",
+         "city": "Weissnatshire",
+         "phone": 1,
+         "created_at": "2016-05-07T23:45:39.842Z",
+         "updated_at": "2016-05-07T23:45:39.842Z",
+         "state": "Florida",
+         "zip": "05582",
+         "country_code": "US",
+         "latitude": "0.0",
+         "longitude": "0.0"
+       },
+       "items": [
+         {
+           "description": "Ostrich",
+           "unit": "t",
+           "quantity": 4
+         },
+         {
+           "description": "Veal",
+           "unit": "gr",
+           "quantity": 18
+         },
+         {
+           "description": "Venison",
+           "unit": "cwt",
+           "quantity": 16
+         },
+         {
+           "description": "Chicken",
+           "unit": "gr",
+           "quantity": 12
+         },
+         {
+           "description": "Bone soup from allowable meats",
+           "unit": "gr",
+           "quantity": 11
+         },
+         {
+           "description": "Liver",
+           "unit": "gr",
+           "quantity": 7
+         }
+       ],
+       "images": []
+     },
+     {
+       "id": 16,
+       "description": "Banh mi butcher mlkshk cardigan viral hoodie tofu.",
+       "created_at": "2016-05-07T23:45:50.464Z",
+       "updated_at": "2016-05-07T23:45:50.464Z",
+       "status_id": 1,
+       "status": {
+         "id": 1,
+         "description": "Accepted"
+       },
+       "participants": {
+         "donor": {
+           "id": 1,
+           "phone": "+1 123 456 789",
+           "name": "Donor User",
+           "email": "donor@hacksmiths.com",
+           "avatar": null
+         },
+         "driver": {
+           "id": 42,
+           "phone": "(267)163-4915 x7030",
+           "name": "Braulio Jacobi",
+           "email": "pearlie.kunde@crooksbuckridge.ca",
+           "avatar": null
+         }
+       },
+       "pickup": {
+         "estimated": null,
+         "actual": null,
+         "latitude": "0.0",
+         "longitude": "0.0",
+         "street_address": null,
+         "street_address_two": null,
+         "city": null,
+         "state": null,
+         "zip": null,
+         "status": {
+           "id": 0,
+           "description": "Pending"
+         },
+         "status_id": 0
+       },
+       "dropoff": {
+         "estimated": "2012-11-23T00:00:00.000Z",
+         "actual": "2015-03-04T00:00:00.000Z",
+         "latitude": "33.4280828891",
+         "longitude": "-87.888795",
+         "street_address": "Elmore Road",
+         "street_address_two": "Apt. 261",
+         "city": "Gordo",
+         "state": "Alabama",
+         "zip": "35466",
+         "status": {
+           "id": 0,
+           "description": "Pending"
+         },
+         "status_id": 0
+       },
+       "recipient": {
+         "id": 16,
+         "name": "Lowe-Kihn",
+         "street_address": "11573 New York 22",
+         "street_address_two": "Apt. 524",
+         "city": "Comstock",
+         "phone": 950,
+         "created_at": "2016-05-07T23:45:46.477Z",
+         "updated_at": "2016-05-07T23:45:46.477Z",
+         "state": "New York",
+         "zip": "12821",
+         "country_code": "US",
+         "latitude": "43.46012",
+         "longitude": "-73.4121277"
+       },
+       "items": [
+         {
+           "description": "Turtle",
+           "unit": "t",
+           "quantity": 1
+         },
+         {
+           "description": "Quail",
+           "unit": "gr",
+           "quantity": 10
+         },
+         {
+           "description": "Pheasant",
+           "unit": "lb",
+           "quantity": 12
+         },
+         {
+           "description": "Beef liver",
+           "unit": "t",
+           "quantity": 20
+         },
+         {
+           "description": "Chicken Liver",
+           "unit": "t",
+           "quantity": 2
+         },
+         {
+           "description": "Ostrich",
+           "unit": "lb",
+           "quantity": 7
+         }
+       ],
+       "images": []
+     }
   ]
 }
 ```
@@ -240,78 +310,111 @@ curl "https://wastenotfoodtaxi.herokuapp.com/api/v1/donations/:id"
 ```json
 {
   "donation": {
-    "id": 2,
-    "description": "Cardigan Pitchfork cliche locavore Wes Anderson biodiesel butcher PBR.",
-    "created_at": "2016-04-17T18:31:13.966Z",
-    "status_id": 2,
-    "updated_at": "2016-04-17T18:31:13.966Z",
+    "id": 7,
+    "note": "Optional note to the driver, should they need more instructions about a donation.",
+    "created_at": "2016-05-07T23:45:50.287Z",
+    "updated_at": "2016-05-07T23:45:50.287Z",
+    "status_id": 1,
+    "status": {
+      "id": 1,
+      "description": "Accepted"
+    },
     "participants": {
       "donor": {
-        "id": 7,
-        "phone": "261-917-1247 x195",
-        "name": "Isabelle Keebler",
-        "email": "william_gutkowski@brekke.ca",
-        "avatar": null,
-        "created_at": "2016-04-17T18:30:58.804Z",
-        "updated_at": "2016-04-17T18:30:58.804Z"
+        "id": 1,
+        "phone": "+1 123 456 789",
+        "name": "Donor User",
+        "email": "donor@hacksmiths.com",
+        "avatar": null
       },
       "driver": {
-        "id": 95,
-        "phone": "716-919-7270",
-        "name": "Matilde Becker",
-        "email": "isac@schroederswift.biz",
-        "avatar": null,
-        "created_at": "2016-04-17T18:31:08.840Z",
-        "updated_at": "2016-04-17T18:31:08.840Z"
+        "id": 74,
+        "phone": "1-775-894-8780",
+        "name": "Gennaro Rau",
+        "email": "nya@beattysmitham.name",
+        "avatar": null
       }
     },
-    "donation_types": [
-      "Jambul",
-      "Lime"
-    ],
     "pickup": {
-      "id": 2,
-      "estimated": "2015-06-26T00:00:00.000Z",
-      "actual": "2013-05-06T00:00:00.000Z",
-      "latitude": "26.1180992126",
-      "longitude": "-90.3760452271",
-      "created_at": "2016-04-17T18:31:14.963Z",
-      "updated_at": "2016-04-17T18:31:14.963Z",
-      "donation_id": 2,
-      "street_address": "83882 Deion Circle",
-      "street_address_two": "Apt. 460",
-      "city": "Hackettview",
-      "state": "Idaho",
-      "zip": "63475"
+      "estimated": null,
+      "actual": null,
+      "latitude": "0.0",
+      "longitude": "0.0",
+      "street_address": null,
+      "street_address_two": null,
+      "city": null,
+      "state": null,
+      "zip": null,
+      "status": {
+        "id": 0,
+        "description": "Pending"
+      },
+      "status_id": 0
     },
     "dropoff": {
-      "id": 2,
-      "estimated": "2014-12-18T00:00:00.000Z",
-      "actual": "2015-03-25T00:00:00.000Z",
-      "latitude": "36.2345447488",
-      "longitude": "-118.0646387827",
-      "created_at": "2016-04-17T18:31:14.972Z",
-      "updated_at": "2016-04-17T18:31:14.972Z",
-      "donation_id": 2,
-      "street_address": "724 Obie Drive",
-      "street_address_two": "Suite 589",
-      "city": "Eulaton",
-      "state": "North Dakota",
-      "zip": "65220"
+      "estimated": "2014-01-23T00:00:00.000Z",
+      "actual": "2016-03-01T00:00:00.000Z",
+      "latitude": "40.8377346033",
+      "longitude": "-81.611008",
+      "street_address": "13831 Youth Street Northwest",
+      "street_address_two": "Apt. 558",
+      "city": "North Lawrence",
+      "state": "Ohio",
+      "zip": "44666",
+      "status": {
+        "id": 0,
+        "description": "Pending"
+      },
+      "status_id": 0
     },
     "recipient": {
-      "id": 79,
-      "name": "McClure-Hills",
-      "street_address": "9293 Stamm Port",
-      "street_address_two": "Apt. 066",
-      "city": "New Tobyberg",
-      "phone": null,
-      "created_at": "2016-04-17T18:31:13.448Z",
-      "updated_at": "2016-04-17T18:31:13.448Z",
-      "state": "California",
-      "zip": "57564"
+      "id": 5,
+      "name": "Christiansen, Crona and West",
+      "street_address": "80324 Marcellus Centers",
+      "street_address_two": "Suite 947",
+      "city": "Weissnatshire",
+      "phone": 1,
+      "created_at": "2016-05-07T23:45:39.842Z",
+      "updated_at": "2016-05-07T23:45:39.842Z",
+      "state": "Florida",
+      "zip": "05582",
+      "country_code": "US",
+      "latitude": "0.0",
+      "longitude": "0.0"
     },
-    "images": ["http://cloudinary.com/image.png", "http://cloudinary.com/image2.png"]
+    "items": [
+      {
+        "description": "Ostrich",
+        "unit": "t",
+        "quantity": 4
+      },
+      {
+        "description": "Veal",
+        "unit": "gr",
+        "quantity": 18
+      },
+      {
+        "description": "Venison",
+        "unit": "cwt",
+        "quantity": 16
+      },
+      {
+        "description": "Chicken",
+        "unit": "gr",
+        "quantity": 12
+      },
+      {
+        "description": "Bone soup from allowable meats",
+        "unit": "gr",
+        "quantity": 11
+      },
+      {
+        "description": "Liver",
+        "unit": "gr",
+        "quantity": 7
+      }
+    ],
+    "images": []
   }
 }
 ```

@@ -20,8 +20,8 @@ Error: 4XX
 }
 ```
 
-# Driver Donations
-
+## Driver Donations
+Although you can interact with donations through the /donations endpoint, it makes more sense to have them semantically accessible through the driver endpoint.  Also, it provides an interface for interacting with donations specific to a driver.  For example, you can get a list of all the donations for a specific driver, including Pending donations that have yet to be assigned to a driver.  You also have convenience methods for getting a Driver's donation list based on the status of the donation.
 
 ## Get All Donations (Pending, Accepted, Completed, Cancelled)
 ### URL
@@ -29,7 +29,7 @@ Error: 4XX
 #### **METHOD**: `GET`
 
 ### HTTP Request
-
+N/A
 ### HTTP Response
 Success: 2XX and an array of Donations, All Pending, and all attached to a Driver
 
