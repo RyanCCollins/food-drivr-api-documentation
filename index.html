@@ -392,7 +392,7 @@ Error: 4XX</p>
 
 <h3 id="url">URL</h3>
 
-<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/:id</code></p>
+<p><code class="prettyprint">https://wastenotfoodtaxi.herokuapp.com/api/v1/sessions/:auth_token</code></p>
 
 <h4 id="method-delete"><strong>Method</strong>:<code class="prettyprint">DELETE</code></h4>
 
@@ -446,150 +446,220 @@ enum DonationStatus: Int {
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"donations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"American apparel before they sold out brunch art sustainable locavore banh mi."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.958Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.958Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(444)523-6939 x15071"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manuela Steuber"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arlo_mann@graham.ca"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:09.818Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:09.818Z"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-612-279-6059 x648"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alivia Baumbach"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hellen.boyer@stark.biz"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:03.037Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:03.037Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Jujube"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Lime"</span><span class="p">],</span><span class="w">
-      </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-02-08T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-08-21T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.5998084143"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-73.971638773"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.906Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.906Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"donation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7272 Aron Green"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 919"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Port Ludie"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Montana"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82184"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-03-11T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-09-02T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34.3823767403"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-81.611008"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.936Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.936Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"donation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7284 Omer Manors"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 199"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reichertchester"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vermont"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"52878"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kozey, Sauer and Koss"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"887 McDermott Corner"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 169"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"South Benjaminport"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.475Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.475Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Connecticut"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60759"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"http://cloudinary.com/image.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image2.png"</span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cardigan Pitchfork cliche locavore Wes Anderson biodiesel butcher PBR."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.966Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.966Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261-917-1247 x195"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabelle Keebler"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william_gutkowski@brekke.ca"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:30:58.804Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:30:58.804Z"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"716-919-7270"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Matilde Becker"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isac@schroederswift.biz"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:08.840Z"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:08.840Z"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"Jambul"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"Lime"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-06-26T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-05-06T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26.1180992126"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-90.3760452271"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.963Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.963Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"donation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83882 Deion Circle"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 460"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hackettview"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idaho"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"63475"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-18T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-25T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36.2345447488"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-118.0646387827"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.972Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.972Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"donation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"724 Obie Drive"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 589"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Eulaton"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"North Dakota"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65220"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"McClure-Hills"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9293 Stamm Port"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 066"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Tobyberg"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.448Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.448Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"California"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57564"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"http://cloudinary.com/image.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image2.png"</span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Legacy description field before items were added. Ignore."</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Make sure to pull around back"</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:50.287Z"</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:50.287Z"</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted"</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 123 456 789"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Donor User"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"donor@hacksmiths.com"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-775-894-8780"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gennaro Rau"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nya@beattysmitham.name"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-01-23T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.8377346033"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-81.611008"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13831 Youth Street Northwest"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 558"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"North Lawrence"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ohio"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44666"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Christiansen, Crona and West"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80324 Marcellus Centers"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 947"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weissnatshire"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:39.842Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:39.842Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Florida"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05582"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ostrich"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Veal"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Venison"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cwt"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chicken"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bone soup from allowable meats"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Liver"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+       </span><span class="p">],</span><span class="w">
+       </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Banh mi butcher mlkshk cardigan viral hoodie tofu."</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:50.464Z"</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:50.464Z"</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+       </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted"</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 123 456 789"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Donor User"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"donor@hacksmiths.com"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"(267)163-4915 x7030"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braulio Jacobi"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pearlie.kunde@crooksbuckridge.ca"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-11-23T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-04T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"33.4280828891"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-87.888795"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elmore Road"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 261"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordo"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alabama"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"35466"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lowe-Kihn"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11573 New York 22"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 524"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comstock"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="mi">950</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:46.477Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:46.477Z"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New York"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12821"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"43.46012"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-73.4121277"</span><span class="w">
+       </span><span class="p">},</span><span class="w">
+       </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turtle"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quail"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pheasant"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lb"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beef liver"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chicken Liver"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="p">{</span><span class="w">
+           </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ostrich"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lb"</span><span class="p">,</span><span class="w">
+           </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+       </span><span class="p">],</span><span class="w">
+       </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -687,78 +757,111 @@ curl -v \
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"donation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cardigan Pitchfork cliche locavore Wes Anderson biodiesel butcher PBR."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.966Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.966Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Optional note to the driver, should they need more instructions about a donation."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:50.287Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:50.287Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="nt">"participants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"donor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261-917-1247 x195"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isabelle Keebler"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william_gutkowski@brekke.ca"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:30:58.804Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:30:58.804Z"</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+1 123 456 789"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Donor User"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"donor@hacksmiths.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"driver"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"716-919-7270"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Matilde Becker"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"isac@schroederswift.biz"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:08.840Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:08.840Z"</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-775-894-8780"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gennaro Rau"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nya@beattysmitham.name"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"donation_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"Jambul"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Lime"</span><span class="w">
-    </span><span class="p">],</span><span class="w">
     </span><span class="nt">"pickup"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-06-26T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2013-05-06T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"26.1180992126"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-90.3760452271"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.963Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.963Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"donation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"83882 Deion Circle"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 460"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hackettview"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Idaho"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"63475"</span><span class="w">
+      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"dropoff"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-18T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-03-25T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36.2345447488"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-118.0646387827"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.972Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:14.972Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"donation_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"724 Obie Drive"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 589"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Eulaton"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"North Dakota"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"65220"</span><span class="w">
+      </span><span class="nt">"estimated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-01-23T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"actual"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"40.8377346033"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-81.611008"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"13831 Youth Street Northwest"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 558"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"North Lawrence"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ohio"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"44666"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pending"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"status_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"recipient"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"McClure-Hills"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9293 Stamm Port"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apt. 066"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New Tobyberg"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.448Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-17T18:31:13.448Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"California"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"57564"</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Christiansen, Crona and West"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"80324 Marcellus Centers"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street_address_two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Suite 947"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weissnatshire"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:39.842Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-05-07T23:45:39.842Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Florida"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05582"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"http://cloudinary.com/image.png"</span><span class="p">,</span><span class="w"> </span><span class="s2">"http://cloudinary.com/image2.png"</span><span class="p">]</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ostrich"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"t"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Veal"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Venison"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cwt"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chicken"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bone soup from allowable meats"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Liver"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gr"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"images"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -786,6 +889,37 @@ curl -v \
 </tbody></table>
 
           <h1 id="donors">Donors</h1>
+
+<p>The biggest functionality needed for Donors is the ability to donate food.</p>
+
+<h3 id="create-a-donation">Create a Donation</h3>
+
+<p>As a signed in Donor, you can create a Donation</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"donation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Legacy field before itemized descriptions was added"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A note to the driver, optional"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pickup_location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">36.3817670</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">-75.8288640</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sushi"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"34"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boxes"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bratwurst"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cans"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="update-a-donation">Update a Donation</h3>
 
           <h1 id="drivers">Drivers</h1>
 
@@ -817,7 +951,9 @@ Error: 4XX</p>
 </code></p>
 </blockquote>
 
-<h1 id="driver-donations">Driver Donations</h1>
+<h2 id="driver-donations">Driver Donations</h2>
+
+<p>Although you can interact with donations through the /donations endpoint, it makes more sense to have them semantically accessible through the driver endpoint.  Also, it provides an interface for interacting with donations specific to a driver.  For example, you can get a list of all the donations for a specific driver, including Pending donations that have yet to be assigned to a driver.  You also have convenience methods for getting a Driver&rsquo;s donation list based on the status of the donation.</p>
 
 <h2 id="get-all-donations-pending-accepted-completed-cancelled">Get All Donations (Pending, Accepted, Completed, Cancelled)</h2>
 
@@ -828,6 +964,8 @@ Error: 4XX</p>
 <h4 id="method-get"><strong>METHOD</strong>: <code class="prettyprint">GET</code></h4>
 
 <h3 id="http-request">HTTP Request</h3>
+
+<p>N/A</p>
 
 <h3 id="http-response">HTTP Response</h3>
 
